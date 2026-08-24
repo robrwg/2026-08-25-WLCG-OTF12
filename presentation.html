@@ -33,7 +33,7 @@
       <h1>AI and Facilities</h1>
       <p class="subtitle">Towards trustworthy adoption of agentic management and use</p>
       <p class="byline">Rob&nbsp;Gardner, <strong>Giordon&nbsp;Stark</strong>, <strong>Ilija&nbsp;Vukotic</strong>, Fengping&nbsp;Hu &middot; University&nbsp;of&nbsp;Chicago</p>
-      <p class="byline" style="font-size:12pt; margin-top:8px;"><i class="fa-solid fa-star" style="color:var(--teal);"></i> With special acknowledgement to <strong>Giordon Stark</strong>, original author of most of these slides.</p>
+      <p class="byline" style="font-size:12pt; margin-top:8px;"><i class="fa-solid fa-star" style="color:var(--teal);"></i> Special acknowledgement: <strong>Giordon Stark</strong>, original author of most slides.</p>
     </div>
     <div style="text-align:center;">
       <!-- NEW-title-blueprint.png: sysadmin + physicist both plug into the WLCG AF/site via the MCP broker, maroon blueprint style -->
@@ -54,39 +54,34 @@
 </section>
 
 <section id="thesis">
-  <p class="kicker">The argument in one slide</p>
+  <p class="kicker">The argument</p>
   <h2>Facility context and <span class="accent">trust</span> challenges</h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; align-items:stretch;">
       <div class="card">
         <p class="card-icon"><i class="fa-solid fa-robot"></i></p>
-        <h3>What everyone watches</h3>
-        <p>Which model is best this month. The runtime. The demo that goes viral.
-           This layer moves fast and <strong>is not ours to own</strong>.</p>
+        <h3>The model layer</h3>
+        <p>Moves fast. <strong>Not ours to own.</strong></p>
       </div>
       <div class="card teal">
         <p class="card-icon"><i class="fa-solid fa-server"></i></p>
-        <h3>What a facility actually owns</h3>
-        <p><strong>Context, identity, trust, packaging, and equitable access.</strong>
-           Stable, hard, and exactly what WLCG sites already own.</p>
+        <h3>The facility layer</h3>
+        <p><strong>Context, identity, trust, packaging, equity.</strong></p>
       </div>
     </div>
-    <div class="callout" style="margin-top:18px;">
-      <p class="label">The claim</p>
-      <p>An LLM becomes useful on <em>your</em> cluster the moment it knows your storage, your
-         scheduler, your data, and your identity model — and stays safe only when those are real.
-         That layer is a <strong>computing-infrastructure problem</strong>, and it ports across
-         experiments. The rest is interchangeable.</p>
-    </div>
-    <div class="callout teal" style="margin-top:12px;">
-      <p style="font-size:14pt;">Which leaves a facility <strong>two trust problems</strong>: AI acting
-         <strong><em>on</em></strong> the facility (privileged actions a sysadmin would do) and AI acting
-         <strong><em>through</em></strong> it (a physicist&rsquo;s analysis, driven from their laptop).
-         This talk is those two stories.</p>
+    <div class="callout teal" style="margin-top:18px;">
+      <p style="font-size:15pt;"><strong>Two trust problems</strong>: AI acting <strong><em>on</em></strong> the
+         facility, and AI acting <strong><em>through</em></strong> it.</p>
     </div>
   </div>
   <aside class="notes">
     This is the spine of the whole talk; everything later is evidence or consequence.
+    Say the claim in full (it came off the slide for the 40-word rule): an LLM becomes useful on YOUR
+    cluster the moment it knows your storage, your scheduler, your data, and your identity model — and
+    stays safe only when those are real. That layer is a computing-infrastructure problem and it ports
+    across experiments; the model layer (which model is best this month, the runtime, the viral demo)
+    is interchangeable. Spell out the two problems: ON = privileged actions a sysadmin would do;
+    THROUGH = a physicist's analysis driven from their laptop.
     Deliver it as a thesis, then promise the structure: (1) a short existence proof from one WLCG
     site, (2) the sysadmin's view — monitoring, privileged operations, and the trust principles
     that let an agent earn them, (3) the physicist's view — laptop to facility through a
@@ -97,24 +92,30 @@
 </section>
 
 <section id="vocab">
-  <p class="kicker">Grounding &middot; fast vocabulary</p>
-  <h2>Assumed vocabulary in this talk</h2>
+  <p class="kicker">Grounding</p>
+  <h2>Assumed vocabulary</h2>
   <div class="content">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
       <div class="card"><p class="card-icon"><i class="fa-solid fa-arrows-spin"></i></p><h3>Agent</h3>
-        <p>A loop that uses an LLM to decide a step, call a <em>tool</em>, read the result, repeat.</p></div>
+        <p>An LLM loop: decide, act, observe, repeat.</p></div>
       <div class="card teal"><p class="card-icon"><i class="fa-solid fa-plug"></i></p><h3>MCP server</h3>
-        <p>Model Context Protocol: a standard adapter exposing a service (Rucio, a notebook, a DB) as <strong>tools + live context</strong> any agent can call.</p></div>
+        <p>A service exposed as <strong>tools + live context</strong>.</p></div>
       <div class="card"><p class="card-icon"><i class="fa-solid fa-book"></i></p><h3>Skill</h3>
-        <p><strong>Static</strong> context loaded on demand: a reusable recipe (&ldquo;how we do a fit here&rdquo;).</p></div>
+        <p>A reusable recipe, loaded on demand.</p></div>
       <div class="card teal"><p class="card-icon"><i class="fa-solid fa-terminal"></i></p><h3>Runtime</h3>
-        <p>The app that gives the agent <strong>hands</strong> — runs commands, wires MCPs, enforces permissions (Claude Code, Codex, &hellip;). Also called a &ldquo;harness.&rdquo;</p></div>
+        <p>The agent&rsquo;s <strong>hands</strong>.</p></div>
     </div>
     <div class="callout" style="margin-top: 14px;">
-      <p style="font-size:14.5pt;"><strong>Bundle</strong> skills + MCPs + agents &rarr; a <strong>plugin</strong>; a discoverable collection of plugins &rarr; a <strong>marketplace</strong>.</p>
+      <p style="font-size:14.5pt;">skills + MCPs + agents &rarr; a <strong>plugin</strong>; plugins &rarr; a <strong>marketplace</strong>.</p>
     </div>
   </div>
   <aside class="notes">
+    Full definitions, spoken (trimmed off the slide for the 40-word rule): an agent uses an LLM to
+    decide a step, call a TOOL, read the result, repeat. An MCP server (Model Context Protocol) is a
+    standard adapter exposing a service (Rucio, a notebook, a DB) as tools plus live context any agent
+    can call. A skill is STATIC context loaded on demand, a reusable recipe ("how we do a fit here").
+    A runtime is the app that gives the agent hands: runs commands, wires MCPs, enforces permissions
+    (Claude Code, Codex, ...). A discoverable collection of plugins is a marketplace.
     Keep FAST — the OTF room is technical but not uniformly agent-literate. 60–90 s max.
     "Runtime" is the deliberate word choice; say once that the AI engineering community also
     says "harness" and move on. Timing: main-line but compressible.
@@ -139,38 +140,41 @@
 
 <section>
 <section id="agenda-levels">
-  <p class="kicker">Existence proof &middot; from analyst to sysadmin</p>
+  <p class="kicker">Existence proof</p>
   <h2>AI at <span class="accent">every layer</span> of the facility</h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 0.8fr 1.2fr; gap:20px; align-items:start;">
       <div>
         <div class="card"><h3><i class="fa-solid fa-user"></i> Analyst-facing</h3>
-          <p style="font-size:13pt;">Find data, generate code, submit, recover, fit. Low autonomy, high convenience.</p></div>
+          <p style="font-size:13pt;">Find data, generate, submit, fit.</p></div>
         <div class="card teal" style="margin-top:10px;"><h3><i class="fa-solid fa-diagram-project"></i> Operations</h3>
-          <p style="font-size:13pt;">Cluster health reports, hold-reason triage, drafted user emails — human-approved.</p></div>
+          <p style="font-size:13pt;">Reports, triage, human-approved emails.</p></div>
         <div class="card" style="margin-top:10px;"><h3><i class="fa-solid fa-screwdriver-wrench"></i> Sysadmin-facing</h3>
-          <p style="font-size:13pt;">Config/runbook copilots in the privileged lane; trust earned, actions gated.</p></div>
+          <p style="font-size:13pt;">Privileged copilots; trust earned, gated.</p></div>
       </div>
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
         <div>
           <div class="shot filled light" style="min-height:0;">
             <img src="images/htcondor-daily-report-slack.png" style="max-height:400px; width:auto;" alt="Daily HTCondor cluster report posted to Slack by the AI monitor agent">
           </div>
-          <p class="shot-hint" style="text-align:center; margin-top:3px; font-size:10.5pt;">Morning report &mdash; <strong>448 held of 14,671</strong> (3.1%)</p>
+          <p class="shot-hint" style="text-align:center; margin-top:3px; font-size:10.5pt;"><strong>448 of 14,671 held</strong></p>
         </div>
         <div>
           <div class="shot filled light" style="min-height:0;">
             <img src="images/htcondor-email-slack.png" style="max-height:400px; width:auto;" alt="Drafted held-job email posted to Slack, approved by a human, then sent by the agent">
           </div>
-          <p class="shot-hint" style="text-align:center; margin-top:3px; font-size:10.5pt;">Drafted fix &rarr; human types &ldquo;approve&rdquo; &rarr; sent</p>
+          <p class="shot-hint" style="text-align:center; margin-top:3px; font-size:10.5pt;">draft &rarr; &ldquo;approve&rdquo; &rarr; sent</p>
         </div>
       </div>
     </div>
     <div class="callout teal" style="margin-top:12px;">
-      <p>Same context layer, <strong>different autonomy and blast radius</strong> at each level. The facility
-         decides where the human gate sits.</p></div>
+      <p>Same context, <strong>different blast radius</strong>.</p></div>
   </div>
   <aside class="notes">
+    Say the full card content aloud (trimmed for the 40-word rule): analyst-facing = find data, generate
+    code, submit, recover, fit — low autonomy, high convenience; operations = cluster health reports,
+    hold-reason triage, drafted user emails, always human-approved; sysadmin-facing = config/runbook
+    copilots in the privileged lane. And the callout's tail: the facility decides where the human gate sits.
     Frames "agents on your behalf" as a LEVELS-OF-AUTONOMY spectrum (the brief asked for
     "AI/LLM at varying levels, user-facing to sysadmin"). Both screenshots approved by Giordon explicitly
     (the "AI monitor" poster is a bot user, not a person). Real detail: a scheduled agent scans HTCondor
@@ -184,7 +188,7 @@
 
 <section id="proof-triage">
   <!-- DEEP-DIVE : the April 2026 queue-triage run, root-cause table -->
-  <p class="kicker">Deep-dive &middot; one triage run, in full</p>
+  <p class="kicker">Deep-dive &middot; one triage run</p>
   <h2>Root causes, not <span class="accent">symptom lists</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1.25fr 0.75fr; gap:20px; align-items:start;">
@@ -204,14 +208,13 @@ Priority: fix /scratch perms c111+c113, then release user-02
 (the agent does NOT do this autonomously)</code></pre>
       <div>
         <ul style="font-size:12.5pt;">
-          <li>Reads HTCondor state via MCP &mdash; no ssh, no scripting.</li>
-          <li>Categorises by <strong>root cause</strong>, distinguishes a blameless node bug from user error.</li>
-          <li>Specific, actionable recommendation per user.</li>
-          <li><strong>Does not release jobs</strong> &mdash; that stays human-approval-required.</li>
+          <li>Reads HTCondor via MCP; no ssh.</li>
+          <li><strong>Root causes</strong>: a blameless node bug &ne; user error.</li>
+          <li><strong>Never releases jobs</strong> autonomously.</li>
         </ul>
         <div class="callout" style="margin-top:8px;">
-          <p style="font-size:12.5pt;">At launch, our HTCondor expert caught <strong>2 errors in 10 minutes</strong>.
-             That&rsquo;s the point: <strong>AI proposes, experts decide.</strong></p></div>
+          <p style="font-size:12.5pt;">Our expert caught <strong>2 errors in 10 minutes</strong>:
+             <strong>AI proposes, experts decide.</strong></p></div>
       </div>
     </div>
   </div>
@@ -227,7 +230,7 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="proof-gateway">
-  <p class="kicker">Existence proof &middot; the other half: a user gateway, live</p>
+  <p class="kicker">The user gateway, live</p>
   <h2>&ldquo;One gateway. <span class="accent">Your entire facility.</span>&rdquo;</h2>
   <div class="content">
     <div style="display:grid; grid-template-columns:1.22fr 0.78fr; gap:18px; align-items:stretch;">
@@ -265,16 +268,15 @@ Priority: fix /scratch perms c111+c113, then release user-02
       </div>
       <div style="display:flex; flex-direction:column; gap:10px; justify-content:center;">
         <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-shield-halved"></i> Credentials stay behind the broker</h3>
-          <p style="font-size:11pt;">Short-lived credentials minted per call. Raw tokens and certificates <strong>never reach the AI assistant</strong>.</p></div>
+          <p style="font-size:11pt;">Raw tokens <strong>never reach the assistant</strong>.</p></div>
         <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-plug-circle-plus"></i> Add tools, not complexity</h3>
-          <p style="font-size:11pt;">One endpoint for datasets, jobs, notebooks, storage. Backends added by configuration.</p></div>
+          </div>
         <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-list-check"></i> Authorize every call</h3>
-          <p style="font-size:11pt;">Group-based access controls and audit logging govern <strong>every tool invocation</strong>.</p></div>
+          <p style="font-size:11pt;">Group-based access; audit logging.</p></div>
       </div>
     </div>
     <div class="callout" style="margin-top:10px;">
-      <p style="font-size:13pt;">Not a demo: Rucio, AMI, HTCondor, JupyterLab and filesystem access are exposed to
-         AI-powered workflows today. <strong>How it works: part 03.</strong></p>
+      <p style="font-size:13pt;"><strong>How it works: part 03.</strong></p>
     </div>
   </div>
   <div class="footnote"><a href="https://mcp-portal.af.uchicago.edu/">mcp-portal.af.uchicago.edu</a> &middot; live diagram reproduced from the portal&rsquo;s landing page (<a href="https://github.com/maniaclab/af-mcp-platform">af-mcp-platform</a>).</div>
@@ -288,7 +290,9 @@ Priority: fix /scratch perms c111+c113, then release user-02
     on the right are the portal's own: credentials stay behind the broker, add tools not complexity,
     authorize every call. Do NOT explain the architecture here; say "hold that thought, part 03 opens
     it up" (the broker diagram and the one-command connect slide live there). If asked now: single
-    endpoint, ~800 AF users behind it. Fallbacks: with no network or reduced motion, the static
+    endpoint, ~800 AF users behind it. Say the "not a demo" list aloud (trimmed off the slide):
+    Rucio, AMI, HTCondor, JupyterLab, and filesystem access exposed to AI-powered workflows today;
+    short-lived credentials minted per call. Fallbacks: with no network or reduced motion, the static
     diagram stands on its own (that's how the portal itself degrades too).
   </aside>
 </section>
@@ -301,32 +305,37 @@ Priority: fix /scratch perms c111+c113, then release user-02
   <aside class="notes">Thesis to say: this is the part of the talk for everyone who runs a site. Nothing
     here grants trust up front; autonomy is earned action-type by action-type, recorded in reviewable
     artifacts, and revocable — and the admins can always see what the agent did and what it has learned.
-    The next five slides are the mechanics: ladder, git governance, levels, memory, enforcement.</aside>
+    One main-line slide follows (the trust ladder); the mechanics hang below it as down-arrow
+    deep-dives: git governance, levels, memory, the Lustre/Ceph honesty beat, enforcement, open-web.</aside>
 </section>
 
+<section>
 <section id="agenda-trust-ladder">
-  <!-- trust ladder + eval harness (OSG-LHC doc Concept 1 + 11) -->
-  <p class="kicker">The sysadmin&rsquo;s view &middot; earned autonomy</p>
+  <!-- trust ladder + eval harness (OSG-LHC doc Concept 1 + 11); the rest of part 02 hangs below as deep-dives -->
+  <p class="kicker">Earned autonomy</p>
   <h2>A trust ladder, with <span class="accent">promotion gates</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr auto 1fr; gap:6px; align-items:stretch;">
-      <div class="card"><h3 style="font-size:13pt;">Observe</h3><p style="font-size:11pt;">read-only diagnostics (the HTCondor monitor)</p></div>
+      <div class="card"><h3 style="font-size:13pt;">Observe</h3><p style="font-size:11pt;">read-only diagnostics</p></div>
       <i class="fa-solid fa-arrow-right text-maroon" style="align-self:center;"></i>
-      <div class="card teal"><h3 style="font-size:13pt;">Suggest</h3><p style="font-size:11pt;">drafts a fix; a human approves</p></div>
+      <div class="card teal"><h3 style="font-size:13pt;">Suggest</h3><p style="font-size:11pt;">a human approves</p></div>
       <i class="fa-solid fa-arrow-right text-maroon" style="align-self:center;"></i>
-      <div class="card"><h3 style="font-size:13pt;">Submit job</h3><p style="font-size:11pt;">acts, scoped and reversible</p></div>
+      <div class="card"><h3 style="font-size:13pt;">Submit job</h3><p style="font-size:11pt;">scoped, reversible</p></div>
       <i class="fa-solid fa-arrow-right text-maroon" style="align-self:center;"></i>
-      <div class="card teal"><h3 style="font-size:13pt;">Restart service</h3><p style="font-size:11pt;">bounces a stuck transformer / worker</p></div>
+      <div class="card teal"><h3 style="font-size:13pt;">Restart service</h3><p style="font-size:11pt;">restarts stuck workers</p></div>
       <i class="fa-solid fa-arrow-right text-maroon" style="align-self:center;"></i>
-      <div class="card"><h3 style="font-size:13pt;">Operate production</h3><p style="font-size:11pt;">remediates Ceph, deploys services</p></div>
+      <div class="card"><h3 style="font-size:13pt;">Operate production</h3><p style="font-size:11pt;">remediates, deploys</p></div>
     </div>
     <div class="callout" style="margin-top:12px;">
-      <p>How does an agent <em>earn</em> the next rung? <strong>Evaluation as the promotion gate</strong>: curated
-         fault scenarios in a staging environment, scored, regression-tested when the model changes. Autonomy is
-         <strong>measured, not assumed</strong> &mdash; the same way society learned to trust autonomous vehicles:
-         evidence first, hands off the wheel later, and never everywhere at once.</p></div>
+      <p>Promotion by <strong>evaluation</strong>: fault scenarios, scored, regression-tested.
+         Autonomy <strong>measured, not assumed</strong>.</p></div>
   </div>
   <aside class="notes">
+    Everything below this slide in part 02 is a down-arrow deep-dive: git governance, levels, memory,
+    the Lustre/Ceph honesty beat, enforcement, open-web policy — pull up what the room wants.
+    Say the callout's cut tail aloud: fault scenarios curated in a staging environment, re-scored when
+    the model changes — the same way society learned to trust autonomous vehicles: evidence first,
+    hands off the wheel later, never everywhere at once.
     The Waymo model, named out loud: driver present, then hands off the wheel on mapped streets, then no
     driver — each step gated by accumulated evidence, bounded by geography (for us: bounded by blast
     radius). Concrete ops verbs on the cards (Observe -> Suggest -> Submit job -> Restart service ->
@@ -338,17 +347,17 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="govern-repo">
-  <p class="kicker">The sysadmin&rsquo;s view &middot; where the rules live</p>
+  <p class="kicker">Deep-dive</p>
   <h2>Governance lives in a <span class="accent">git repository</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap:22px; align-items:start;">
       <div>
         <div class="card"><h3 style="font-size:14.5pt;">Principles</h3>
-          <p style="font-size:12.5pt;">Immutable commitments: auditability, minimal privilege, human-in-the-loop until trust is earned, reproducibility.</p></div>
+          <p style="font-size:12.5pt;">Auditability, minimal privilege, human-in-the-loop.</p></div>
         <div class="card teal" style="margin-top:8px;"><h3 style="font-size:14.5pt;">Policies</h3>
-          <p style="font-size:12.5pt;">Scoped YAML rules derived from them: &ldquo;storage access read-only by default,&rdquo; &ldquo;no outbound web unless listed,&rdquo; &ldquo;wait for human ack after restart.&rdquo;</p></div>
-        <div class="card" style="margin-top:8px;"><h3 style="font-size:14.5pt;">Runbooks &mdash; the atomic unit of trust</h3>
-          <p style="font-size:12.5pt;">A human-reviewed, PR-gated spec per capability: what it does, what it may do <strong>autonomously</strong>, what requires a human.</p></div>
+          <p style="font-size:12.5pt;">&ldquo;Read-only by default;&rdquo; &ldquo;no outbound web.&rdquo;</p></div>
+        <div class="card" style="margin-top:8px;"><h3 style="font-size:14.5pt;">Runbooks: the atomic unit of trust</h3>
+          <p style="font-size:12.5pt;">PR-gated: autonomous vs human-required.</p></div>
       </div>
       <div>
         <pre style="margin:0;"><code class="block" style="font-size:10.5pt; line-height:1.5;">governance/
@@ -362,13 +371,17 @@ Priority: fix /scratch perms c111+c113, then release user-02
     &#9500;&#9472;&#9472; htcondor/queue-health.md
     &#9492;&#9472;&#9472; kubernetes/cluster-health.md</code></pre>
         <div class="callout" style="margin-top:10px;">
-          <p style="font-size:12.5pt;">AI drafts from cluster ground truth &rarr; the <strong>domain expert reviews and
-             corrects</strong> &rarr; merged = blessed &rarr; runbook + agent config = a deployed capability.
-             <strong>The PR history is the audit record.</strong></p></div>
+          <p style="font-size:12.5pt;">AI drafts &rarr; <strong>expert reviews</strong> &rarr; merged.
+             <strong>The PR is the audit record.</strong></p></div>
       </div>
     </div>
   </div>
   <aside class="notes">
+    Card detail, spoken: principles are immutable commitments (human-in-the-loop UNTIL TRUST IS EARNED);
+    policies are scoped YAML derived from them ("wait for human ack after restart"); a runbook is a
+    human-reviewed, PR-gated spec per capability — what it does, what it may do autonomously, what
+    requires a human. The full loop: AI drafts from cluster ground truth, the domain expert reviews and
+    corrects, merged = blessed, runbook + agent config = a deployed capability.
     The tools sysadmins already trust — git, code review, PRs — become the trust machinery for agents.
     Nothing exotic: a principle is a value, a policy is that value made specific to one service, a runbook
     is the contract for one capability. The runbook is deliberately the atomic unit of trust: an action
@@ -380,30 +393,33 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="govern-levels">
-  <p class="kicker">The sysadmin&rsquo;s view &middot; blast radius, not bureaucracy</p>
-  <h2>Three <span class="accent">governance levels</span>, one progression</h2>
+  <p class="kicker">Deep-dive &middot; blast radius</p>
+  <h2>Three <span class="accent">governance levels</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; align-items:stretch;">
       <div class="card"><h3 style="font-size:15pt;">Level 1 &middot; Assisted</h3>
-        <p style="font-size:12.5pt;">AI drafts runbooks and diagnoses; <strong>humans execute everything</strong>. No autonomous action. Blast radius: a document.</p></div>
-      <div class="card teal"><h3 style="font-size:15pt;">Level 2 &middot; User-scope agents</h3>
-        <p style="font-size:12.5pt;">Agents act <strong>for a physicist, with that user&rsquo;s credentials only</strong> &mdash; no admin access, ever. Blast radius: one user&rsquo;s quota.</p></div>
-      <div class="card"><h3 style="font-size:15pt;">Level 3 &middot; Privileged automation</h3>
-        <p style="font-size:12.5pt;">Scheduled agents with <strong>scoped service accounts</strong>, read-only defaults, explicit write allowlists, PR-gated changes. Blast radius: bounded by the account.</p></div>
+        <p style="font-size:12.5pt;"><strong>Humans execute.</strong> Blast radius: a document.</p></div>
+      <div class="card teal"><h3 style="font-size:15pt;">Level 2 &middot; User-scope</h3>
+        <p style="font-size:12.5pt;"><strong>User credentials only.</strong> A quota.</p></div>
+      <div class="card"><h3 style="font-size:15pt;">Level 3 &middot; Privileged</h3>
+        <p style="font-size:12.5pt;"><strong>Scoped accounts.</strong> The account.</p></div>
     </div>
     <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr; gap:10px; align-items:center; margin-top:16px;">
-      <div class="node fill" style="font-size:13.5pt;">Dev sandbox<span class="sub">prove the pattern</span></div>
+      <div class="node fill" style="font-size:13.5pt;">Dev sandbox</div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node fill" style="font-size:13.5pt;">Staging cluster<span class="sub">prove it under load</span></div>
+      <div class="node fill" style="font-size:13.5pt;">Staging cluster</div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node teal" style="font-size:13.5pt;">Production<span class="sub">only after both</span></div>
+      <div class="node teal" style="font-size:13.5pt;">Production</div>
     </div>
     <div class="callout" style="margin-top:12px;">
-      <p>Every capability climbs <strong>both stairs independently</strong>: governance level (what it may do)
-         and environment (where it may do it). Nothing skips a step &mdash; the framing is <strong>blast
-         radius</strong>, not compliance.</p></div>
+      <p><strong>Nothing skips a step.</strong></p></div>
   </div>
   <aside class="notes">
+    Card detail, spoken: L1 = AI drafts runbooks and diagnoses, no autonomous action; L2 = agents act
+    for a physicist with that user's credentials only, no admin access ever; L3 = scheduled agents,
+    scoped service accounts, read-only defaults, explicit write allowlists, PR-gated changes. The
+    callout's cut tail: governance level = what it may do, environment = where; the framing is blast
+    radius, not compliance. Environment stair: dev proves the pattern, staging proves it under load.
     Level 1 is where every site can start tomorrow: AI-assisted runbook writing, humans at the keyboard.
     Level 2 is the physicist story from Part 2 — the agent holds the user's own credentials and nothing
     more, so the worst case is what that user could already do. Level 3 is the interesting one for this
@@ -415,36 +431,35 @@ Priority: fix /scratch perms c111+c113, then release user-02
   </aside>
 </section>
 
-<section>
 <section id="govern-memory">
-  <p class="kicker">The sysadmin&rsquo;s view &middot; watching the watcher</p>
-  <h2>Memory: how admins <span class="accent">see what the agent knows</span></h2>
+  <p class="kicker">Deep-dive</p>
+  <h2><span class="accent">What the agent knows</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:12px;">
       <div class="card"><h3 style="font-size:13.5pt;">Normative source</h3>
-        <p style="font-size:11.5pt;">Runbooks, policies, agent configs. <strong>Human-written, PR-gated.</strong> What the agent <em>may do</em>.</p></div>
+        <p style="font-size:11.5pt;">What it <em>may do</em>.</p></div>
       <div class="card teal"><h3 style="font-size:13.5pt;">Runtime state record</h3>
-        <p style="font-size:11.5pt;">Auto-pushed to git: accumulated knowledge + daily session logs. <strong>Agent-written, human-reviewed.</strong> What it <em>has learned</em>.</p></div>
-      <div class="card"><h3 style="font-size:13.5pt;">DR archive</h3>
-        <p style="font-size:11.5pt;">Daily snapshots of agent state and conversations. Restart = restore + <strong>wait for human ack</strong>.</p></div>
-      <div class="card teal"><h3 style="font-size:13.5pt;">Session memory</h3>
-        <p style="font-size:11.5pt;">Live in-process state. Ephemeral by design &mdash; lost on crash, and that&rsquo;s fine.</p></div>
+        <p style="font-size:11.5pt;">What it <em>has learned</em>.</p></div>
+      <div class="card"><h3 style="font-size:13.5pt;">DR archive</h3></div>
+      <div class="card teal"><h3 style="font-size:13.5pt;">Session memory</h3></div>
     </div>
     <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap:8px; align-items:center; margin-top:14px;">
-      <div class="node fill" style="font-size:12.5pt;">Runbook bootstraps the agent</div>
+      <div class="node fill" style="font-size:12.5pt;">Runbook</div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node fill" style="font-size:12.5pt;">Agent accumulates knowledge</div>
+      <div class="node fill" style="font-size:12.5pt;">Agent learns</div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node fill" style="font-size:12.5pt;">Team reviews weekly</div>
+      <div class="node fill" style="font-size:12.5pt;">Weekly review</div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node teal" style="font-size:12.5pt;">Durable insight &rarr; runbook, via PR</div>
+      <div class="node teal" style="font-size:12.5pt;">PR</div>
     </div>
     <div class="callout" style="margin-top:12px;">
-      <p>And when an action type moves from human-approval to autonomous, that is itself <strong>a PR to the
-         agent&rsquo;s config</strong> &mdash; a <strong>trust escalation log</strong>. You record the moment you
-         stopped watching.</p></div>
+      <p>Autonomy changes are PRs, a <strong>trust escalation log</strong>: when you stopped watching.</p></div>
   </div>
   <aside class="notes">
+    Card detail, spoken: normative source = runbooks, policies, agent configs; runtime state record =
+    accumulated knowledge + daily session logs, auto-pushed to git, human-reviewed; DR archive = daily
+    snapshots of agent state and conversations, restart = restore + wait for human ack; session memory =
+    live in-process state, lost on crash, and that's fine.
     This is the answer to "how would I even know what it's doing?" — the question every experienced admin
     asks first. Two distinctions to say out loud: runbooks are read-only and procedural (what it CAN do);
     memory is read-write and experiential (what it HAS learned) — a window into the running agent's mind,
@@ -459,16 +474,15 @@ Priority: fix /scratch perms c111+c113, then release user-02
 
 <section id="arch-quiet">
   <!-- DEEP-DIVE : the honesty beat — what an ungrounded agent does on a real cluster -->
-  <p class="kicker">Deep-dive &middot; the flip side of context</p>
+  <p class="kicker">Deep-dive &middot; the flip side</p>
   <h2>No context? It should <span class="accent">stay quiet</span></h2>
   <div class="content">
-    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What actually happened</p>
-      <p>Our cluster agents confidently recommended <strong>Lustre</strong> tuning for a filesystem that is
-         actually <strong>Ceph</strong>. Zero Ceph context. Plausible, fluent, and wrong.</p></div>
+    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What happened</p>
+      <p>Our agents confidently recommended <strong>Lustre</strong> tuning, for a <strong>Ceph</strong>
+         filesystem. Plausible, fluent, wrong.</p></div>
     <div class="callout teal" style="margin-top:14px;">
-      <p>The rule we adopted: <strong>ungrounded &rarr; silent</strong>. Context isn&rsquo;t only what makes an
-         agent useful; it&rsquo;s what makes it <em>safe to trust</em>. This is why "who keeps the context true"
-         is a real infrastructure question, not bookkeeping.</p></div>
+      <p>The rule: <strong>ungrounded &rarr; silent</strong>. Context is what makes an agent
+         <em>safe to trust</em>.</p></div>
   </div>
   <aside class="notes">Backup under the memory slide, for when the room asks "what happens when the context
   is wrong?" A real incident from our own cluster agents, and exactly why "who keeps the context true" (the
@@ -476,37 +490,37 @@ Priority: fix /scratch perms c111+c113, then release user-02
   plants the seed for the trust/maintenance research questions at the end. Real quotes from Judith/Farnaz
   can stay or be paraphrased.</aside>
 </section>
-</section>
 
-<section>
 <section id="agenda-sandbox">
-  <p class="kicker">The sysadmin&rsquo;s view &middot; enforcement</p>
-  <h2>Enforcement is <span class="accent">dual</span> &mdash; and sandboxing is real work</h2>
+  <p class="kicker">Deep-dive &middot; enforcement</p>
+  <h2>Enforcement is <span class="accent">dual</span></h2>
   <div class="content">
-    <p style="margin-bottom:4px;">Two mechanisms, both required: <strong>policy awareness</strong> inside the agent&rsquo;s
-       context (it reasons about the rule before acting) and <strong>technical enforcement</strong> outside it
-       (RBAC, scoped service accounts, network isolation, allowlists). Never one without the other:</p>
+    <p style="margin-bottom:4px;"><strong>Policy awareness</strong> inside the agent; <strong>technical
+       enforcement</strong> outside.</p>
     <div style="display:grid; grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr; gap:10px; align-items:center; margin:10px 0;">
-      <div class="node fill" style="font-size:13.5pt;">Pods<span class="sub">k8s default: caps, no host access</span></div>
+      <div class="node fill" style="font-size:13.5pt;">Pods<span class="sub">k8s default</span></div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node fill" style="font-size:13.5pt;">Sandbox<span class="sub">off k8s: bubblewrap, sydbox</span></div>
+      <div class="node fill" style="font-size:13.5pt;">Sandbox<span class="sub">bubblewrap, sydbox</span></div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node teal" style="font-size:13.5pt;">Policy<span class="sub">fine-grained, node-level</span></div>
+      <div class="node teal" style="font-size:13.5pt;">Policy<span class="sub">node-level</span></div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node teal" style="font-size:13.5pt;">Privilege<span class="sub">earned, human-gated</span></div>
+      <div class="node teal" style="font-size:13.5pt;">Privilege<span class="sub">earned</span></div>
     </div>
     <div class="callout" style="margin-top:8px; display:grid; grid-template-columns: 1fr auto; gap:16px; align-items:center;">
       <div>
-        <p class="label"><i class="fa-solid fa-triangle-exclamation"></i> The honest gap</p>
-        <p>Today a runtime can <em>advise</em> (managed <code>CLAUDE.md</code>, allow-lists) but can&rsquo;t reliably
-           <strong>hard-deny</strong> a command at the user level. Real blocking needs a privileged
-           <strong>policy engine</strong> on the node, or a sandbox &mdash; as a fellow facility sysadmin put it,
-           an agent just lets users 100&times; the bad behaviour we&rsquo;ve had for decades.</p>
+        <p><i class="fa-solid fa-triangle-exclamation" style="color:var(--maroon);"></i> The honest gap: runtimes
+           <em>advise</em>; they can&rsquo;t <strong>hard-deny</strong>. Blocking needs a node
+           <strong>policy engine</strong> or sandbox.</p>
       </div>
       <img src="images/NEW-control-meme.jpg" alt="Meme captioned I've got to keep control" style="max-height:100px; border-radius:6px; box-shadow:0 4px 12px rgba(0,0,0,0.15); transform:rotate(1.5deg);">
     </div>
   </div>
   <aside class="notes">
+    Cut from the slide for the 40-word rule, say aloud: two mechanisms, both required, never one without
+    the other — the agent reasons about the rule before acting (managed CLAUDE.md, allow-lists), and RBAC,
+    scoped service accounts, network isolation, allowlists enforce outside it. Lincoln's line ("an agent
+    just lets users 100x the bad behaviour we've had for decades") moved fully off-slide — deliver it
+    with the meme.
     Say each step out loud: pods are the k8s default (resource caps, network policy, no host access);
     off k8s, sandboxes like bubblewrap or sydbox fence files/network/hardware on bare login nodes;
     policy is the fine-grained node-level layer (policy engines — keep it high-level, details are not
@@ -524,30 +538,31 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="agenda-openweb">
-  <p class="kicker">Agenda &middot; a security reality</p>
+  <p class="kicker">Deep-dive &middot; a security reality</p>
   <h2>Agents don&rsquo;t get the <span class="accent">open web</span></h2>
   <div class="content">
     <ul>
-      <li>Facilities (NERSC, UChicago, SLAC, BNL, AmSC, NRP&hellip;) are <strong>blocking web access for agents</strong> to defend against prompt injection from untrusted pages.</li>
-      <li>So a skill can&rsquo;t just say &ldquo;go read the docs.&rdquo; It must encode <strong>just enough</strong> guidance &mdash; and delegate &ldquo;what&rsquo;s the latest?&rdquo; to a <strong>curated MCP</strong>, not the open internet.</li>
+      <li>Facilities <strong>block agent web access</strong>: prompt injection.</li>
     </ul>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:12px; align-items:start;">
       <div>
         <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-xmark" style="color:var(--maroon);"></i> <strong>Stale-prone</strong></p>
         <p style="margin:6px 0 0;"><code>use /path/2024-egamma-recs.config</code></p>
-        <p class="text-muted" style="font-size:12pt; margin:3px 0 0;">a hardcoded path, wrong within a season.</p>
-      </div>
+              </div>
       <div>
         <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-check" style="color:var(--teal);"></i> <strong>Durable</strong></p>
-        <p style="margin:6px 0 0;">&ldquo;ask the <strong>chATLAS MCP</strong> for the latest recommendation path, then configure.&rdquo;</p>
-        <p class="text-muted" style="font-size:12pt; margin:3px 0 0;">the MCP owns &ldquo;what&rsquo;s current.&rdquo;</p>
+        <p style="margin:6px 0 0;">&ldquo;ask <strong>chATLAS</strong> for the current path.&rdquo;</p>
       </div>
     </div>
     <div class="callout teal" style="margin-top:14px;">
-      <p>The design rule: <strong>minimal durable guidance + a trusted live source</strong>. What an agent may
-         reach is a <em>facility</em> decision, not a user convenience.</p></div>
+      <p><strong>Minimal durable guidance + a trusted live source</strong>: a <em>facility</em> decision.</p></div>
   </div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud: NERSC, UChicago, SLAC, BNL, AmSC, NRP are all blocking agent
+    web access against prompt injection from untrusted pages. A skill can't just say "go read the docs":
+    it encodes JUST ENOUGH guidance and delegates "what's the latest?" to a curated MCP (the MCP owns
+    "what's current"), not the open internet. What an agent may reach is a facility decision, not a
+    user convenience.
     From the Giovanni Guerrieri / ATLAS-AMG email thread + Giordon's reply (Jun 2026). Core point: the
     "just point AI at the docs + basic guardrails" instinct fails because AFs block agent web access
     (prompt-injection hardening); hence skills hard-code "just enough" and use an MCP (e.g. chATLAS) for
@@ -570,22 +585,22 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="agenda-gateway">
-  <p class="kicker">The physicist&rsquo;s view &middot; the USB-C port of the facility</p>
+  <p class="kicker">The USB-C port of the facility</p>
   <h2>A credential-brokered <span class="accent">MCP gateway</span></h2>
   <div class="content">
-    <p style="margin-bottom:2px;">One standard socket in front of the facility&rsquo;s services. The LLM client
-       <strong>never holds raw credentials</strong>; the broker authenticates the user, mints short-lived
-       per-service credentials, and audits every tool call.</p>
+    <p style="margin-bottom:2px;">One socket. The client <strong>never holds raw credentials</strong>:
+       the broker authenticates, mints short-lived credentials, audits every call.</p>
     <div style="text-align:center; margin:6px 0 4px;">
       <img src="images/NEW-af-mcp-arch.svg" alt="Claude, Gemini or any MCP client to the mcp.af.uchicago.edu front door (oauth2-proxy, AF Keycloak OIDC), through a FastMCP aggregator and AF credential broker (FastAPI /v1) doing identity, authZ, credential brokering and audit, fanning out to rucio-mcp, ami-mcp, openmagic, panda-mcp, condor-mcp, gitlab-mcp, jupyter-control and an Nth backend with no code change" style="max-width:100%; max-height:315px;">
     </div>
     <div class="callout teal" style="margin-top:4px;">
-      <p style="font-size:13.5pt;">The <strong>strategic boundary</strong>: identity, authZ, credential brokering, and audit in one
-         place &mdash; the same boundary a site needs regardless of AI. Live at
-         <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s <strong>af-mcp-platform</strong>.</p></div>
+      <p style="font-size:13.5pt;">Live at <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s
+         <strong>af-mcp-platform</strong>.</p></div>
   </div>
   <div class="footnote"><a href="https://github.com/maniaclab/af-mcp-platform">af-mcp-platform</a> &middot; <a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/atlas-outreach-data-tools/atlasopenmagic-mcp">atlasopenmagic</a> &middot; <a href="https://panda-wms.readthedocs.io/en/latest/advanced/mcp.html">panda-mcp</a> &middot; <a href="https://indico.cern.ch/event/1471803/contributions/6967102/">condor-mcp</a> (Bockelman, CHEP&nbsp;2026).</div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud: the STRATEGIC BOUNDARY — identity, authZ, credential brokering,
+    and audit in one place, the same boundary a site needs regardless of AI.
     THE highlighted named artifact of the talk: Giordon's af-mcp-platform (github.com/maniaclab/af-mcp-platform),
     the new way to interface with the AF. Say the USB-C line out loud: one standard socket, any device on
     the other end; the facility standardizes the port, not the laptop. Real numbers: ~800 users,
@@ -601,31 +616,26 @@ Priority: fix /scratch perms c111+c113, then release user-02
   </aside>
 </section>
 
+<section>
 <section id="agenda-portal">
-  <p class="kicker">The physicist&rsquo;s view &middot; self-service, today</p>
+  <p class="kicker">Self-service, today</p>
   <h2>Getting connected takes <span class="accent">one command</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1.05fr 0.95fr; gap:24px; align-items:start;">
       <div>
-        <p style="margin-bottom:8px;">Any MCP-capable client, one endpoint:</p>
+        <p style="margin-bottom:8px;">Any MCP client, one endpoint:</p>
         <pre style="margin:0 0 10px;"><code class="block" style="font-size:11pt;">claude mcp add --transport http atlas-af \
   https://mcp.af.uchicago.edu/mcp</code></pre>
         <ul style="font-size:13pt;">
-          <li>First call returns a 401 &rarr; the client discovers the broker&rsquo;s OAuth endpoints &rarr; a <strong>browser login</strong> opens. No manual token handling.</li>
-          <li>Clients that can&rsquo;t do the OAuth flow mint a token at the <strong>self-service portal</strong> instead.</li>
-          <li><strong>Group-based access controls and audit logging</strong> govern every tool invocation.</li>
+          <li>401 &rarr; OAuth discovery &rarr; <strong>browser login</strong>. No manual tokens.</li>
+          <li>No OAuth flow? Mint a token at the <strong>portal</strong>.</li>
         </ul>
       </div>
       <div>
         <div class="card teal">
           <h3 style="font-size:14.5pt;"><i class="fa-solid fa-id-badge"></i> mcp-portal.af.uchicago.edu</h3>
-          <p style="font-size:12.5pt;">The physicist&rsquo;s front door: link a CERN/ATLAS identity, mint an on-demand
-             x509/VOMS proxy, generate or revoke client tokens, and <strong>see which backends your account can
-             reach</strong>.</p>
-        </div>
-        <div class="callout" style="margin-top:10px;">
-          <p style="font-size:12.5pt;">&ldquo;One gateway. Your entire facility.&rdquo; &mdash; datasets, jobs,
-             notebooks, storage &mdash; while <strong>credentials stay behind the broker</strong>.</p>
+          <p style="font-size:12.5pt;">Link identities, mint x509/VOMS proxies, manage tokens,
+             <strong>see your backends</strong>.</p>
         </div>
       </div>
     </div>
@@ -642,63 +652,29 @@ Priority: fix /scratch perms c111+c113, then release user-02
   </aside>
 </section>
 
-<section id="arch-intent">
-  <p class="kicker">The physicist&rsquo;s view &middot; pipelines from the laptop</p>
-  <h2>The agent speaks <span class="accent">intent</span>, the facility wires the backend</h2>
-  <div class="content">
-    <p style="margin-bottom:4px;">A whole pipeline driven from the
-       physicist&rsquo;s own coding environment, through the broker, to one facility or several:</p>
-    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:6px 0;">
-      <p class="node fill" style="font-size:14pt;">data_tool<span class="sub">&ldquo;get this dataset + metadata&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">transform_tool<span class="sub">&ldquo;turn inputs into histograms&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">batch_tool<span class="sub">&ldquo;run across the cluster&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">inference_tool<span class="sub">&ldquo;fit and get a limit&rdquo;</span></p>
-    </div>
-    <p class="text-center text-maroon" style="font-size:20pt; margin:2px;"><i class="fa-solid fa-arrows-down-to-line"></i></p>
-    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:6px;">
-      <div class="card teal"><p style="font-size:12.5pt;">Rucio &middot; dCache &middot; Open Data</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">coffea &middot; uproot &middot; ServiceX</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">HTCondor &middot; Slurm &middot; Dask &middot; REANA</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">pyhf &middot; cabinetry &middot; RooFit &middot; SBI</p></div>
-    </div>
-    <p class="text-muted" style="font-size:12pt; margin-top:10px;"><code>inference_tool</code> privileges no single fitter: <strong>HS3</strong> (HEP Statistics Serialization Standard) + <code>pyhs3</code> are the bridge between pyhf and RooFit.</p>
-    <div class="callout" style="margin-top:12px;">
-      <p>The agent never names &ldquo;coffea&rdquo; or &ldquo;condor.&rdquo; That indirection is exactly what lets the
-         <strong>same agent move between facilities and experiments</strong>.</p></div>
-  </div>
-  <aside class="notes">
-    The laptop-first story: the physicist never opens a facility UI; the agent calls intent-level
-    tools and the facility's playbook maps them to the local backends. Because the mapping is
-    facility-side, the same laptop plugs into a second facility by adding a second broker endpoint —
-    say that sentence out loud, it's the multi-facility punchline. The HS3/pyhs3 line pre-empts the
-    stats-interop question: the inference abstraction does not privilege one fitter.
-  </aside>
-</section>
-
-<section>
 <section id="agenda-identity">
-  <p class="kicker">The physicist&rsquo;s view &middot; identity is the bottleneck</p>
+  <p class="kicker">Deep-dive &middot; the bottleneck</p>
   <h2>Who is this <span class="accent">client</span>, and may it act as you?</h2>
   <div class="content">
-    <p>Every MCP client &mdash; Claude, an internal tool, something a student wrote &mdash; wants to connect.
-       Once agents are the ones connecting, this stops being a one-time setup step and becomes a
-       <strong>continuous, scalable decision</strong>:</p>
     <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin:16px 0;">
-      <div class="node fill" style="font-size:14pt;">Who is it?<span class="sub">a durable identity, not just a name</span></div>
-      <div class="node fill" style="font-size:14pt;">Do we trust it?<span class="sub">policy, not vibes</span></div>
-      <div class="node fill" style="font-size:14pt;">How much authority?<span class="sub">scoped, auditable</span></div>
+      <div class="node fill" style="font-size:14pt;">Who is it?</div>
+      <div class="node fill" style="font-size:14pt;">Do we trust it?</div>
+      <div class="node fill" style="font-size:14pt;">How much authority?</div>
     </div>
     <div class="callout teal">
-      <p><strong>Identity is becoming the bottleneck</strong>, not an afterthought &mdash; and WLCG&rsquo;s
-         x509&rarr;OIDC transition is the backdrop. Today, most clients register the way <a href="https://www.rfc-editor.org/rfc/rfc7591">DCR</a>
-         prescribes &mdash; the adopted, stateful mechanism. A newer <strong>draft</strong> spec,
-         <a href="https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-02.html">CIMD</a>,
-         proposes something stateless instead (a client&rsquo;s identity as a URL the server fetches) &mdash; worth
-         watching, not yet the default. This sits <em>on top of</em> the community&rsquo;s federated-identity work
-         &mdash; WLCG token profiles, the <a href="https://aarc-community.org/">AARC</a> blueprint, IAM &mdash;
-         not instead of it.</p></div>
+      <p>Today: <a href="https://www.rfc-editor.org/rfc/rfc7591">DCR</a>. Worth watching:
+         <a href="https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-02.html">CIMD</a>
+         (identity as a URL). Atop WLCG tokens + <a href="https://aarc-community.org/">AARC</a>.</p></div>
   </div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud: every MCP client — Claude, an internal tool, something a student
+    wrote — wants to connect; once AGENTS are the ones connecting this stops being one-time setup and
+    becomes a continuous, scalable decision. The three questions: a durable identity (not just a name);
+    trust by policy, not vibes; authority scoped and auditable. Identity is becoming the bottleneck, not
+    an afterthought, with WLCG's x509→OIDC transition as the backdrop. DCR is the adopted, stateful
+    mechanism; CIMD is a newer DRAFT (stateless, client identity as a URL the server fetches) — worth
+    watching, not yet the default. All of it sits ON TOP OF WLCG token profiles, the AARC blueprint,
+    IAM — not instead of them.
     SIMPLIFIED main line (moved DCR/CIMD jargon to the two backups) — for a mixed colloquium room, the
     memorable takeaway is "identity becomes the bottleneck," not "DCR vs CIMD." Say the three questions
     out loud as the research problem. IMPORTANT ACCURACY NOTE: don't imply CIMD is "the solution" — DCR is
@@ -722,13 +698,15 @@ Priority: fix /scratch perms c111+c113, then release user-02
 { "client_id":"https://app.example/oauth.json",
   "client_name":"…","redirect_uris":[…] }   ← hosted by the client</code></pre>
     <ul style="font-size:13pt;">
-      <li><strong>Wins:</strong> no <code>/register</code> abuse surface; stable identity per app; domain-based allow/deny.</li>
-      <li><strong>Costs:</strong> server makes outbound fetches &rarr; <strong>SSRF</strong> risk (block private IPs, HTTPS-only, size/timeout caps); localhost ambiguity; domain &ne; trust.</li>
+      <li><strong>Wins:</strong> no <code>/register</code> abuse; stable identity; domain allow/deny.</li>
+      <li><strong>Costs:</strong> outbound fetches (<strong>SSRF</strong>); localhost ambiguity; domain &ne; trust.</li>
     </ul>
-    <p class="text-muted" style="font-size:12pt; margin-top:8px;">Concretely in FastMCP: <code>CIMDTrustPolicy(trusted_domains=["claude.ai","cursor.com"], auto_approve_trusted=True)</code> &mdash; the facility decides which domains skip consent.</p>
   </div>
   <div class="footnote">Auth today reuses grid creds (x509) or Keycloak OIDC &mdash; <a href="https://github.com/kratsg/rucio-mcp/blob/main/docs/rucio-oauth-bridge.md">OAuth bridge docs</a>.</div>
-  <aside class="notes">BACKUP. The client_id IS the HTTPS URL to a metadata doc the client hosts; the authn server
+  <aside class="notes">BACKUP. Cut from the slide: SSRF mitigations (block private IPs, HTTPS-only,
+  size/timeout caps), and the concrete FastMCP knob — CIMDTrustPolicy(trusted_domains=["claude.ai",
+  "cursor.com"], auto_approve_trusted=True): the facility decides which domains skip consent.
+  The client_id IS the HTTPS URL to a metadata doc the client hosts; the authn server
   fetches it on demand, validates client_id == source URL and the redirect_uris, then applies its own
   policy. Read-only, stateless, fetch-on-demand. Spec status: adopted into MCP 2025-11-25 via SEP-991,
   from an IETF draft promoted to WG status Oct 2025 (origins in IndieAuth; in production at Bluesky);
@@ -738,6 +716,38 @@ Priority: fix /scratch perms c111+c113, then release user-02
   Claude client_id URLs, and the full spec list — pull that up only if someone like Groep or Campana
   pushes on mechanics.</aside>
 </section>
+</section>
+
+<section id="arch-intent">
+  <p class="kicker">One pipeline, four personas</p>
+  <h2>Agent <span class="accent">personalities</span></h2>
+  <div class="content">
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:14px 0 6px;">
+      <p class="node fill" style="font-size:14pt;">data_agent<span class="sub">&ldquo;get the dataset&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">transform_agent<span class="sub">&ldquo;make the histograms&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">batch_agent<span class="sub">&ldquo;run the cluster&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">inference_agent<span class="sub">&ldquo;fit the limit&rdquo;</span></p>
+    </div>
+    <p class="text-center text-maroon" style="font-size:20pt; margin:2px;"><i class="fa-solid fa-arrows-down-to-line"></i></p>
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:6px;">
+      <div class="card teal"><p style="font-size:12.5pt;">Rucio &middot; dCache</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">coffea &middot; ServiceX</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">HTCondor &middot; Dask</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">pyhf &middot; RooFit</p></div>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <p>Personas speak <strong>intent</strong>, never backend names: portable across facilities.</p></div>
+  </div>
+  <aside class="notes">
+    Say aloud: four personas the physicist's assistant adopts; the facility wires each to its backends.
+    Reframed (Rob, night before): the four intent tools presented as agent PERSONALITIES / personas the
+    physicist's assistant adopts — a data steward, a transformer, a batch runner, a statistician — each
+    mapped facility-side to local backends. Say the full backend lists aloud: Rucio/dCache/Open Data;
+    coffea/uproot/ServiceX; HTCondor/Slurm/Dask/REANA; pyhf/cabinetry/RooFit/SBI. The persona never names
+    "coffea" or "condor"; that indirection is what lets the same laptop plug into a second facility by
+    adding a second broker endpoint — the multi-facility punchline, say it out loud. HS3 + pyhs3 are the
+    pyhf/RooFit bridge if the stats-interop question comes: inference_agent privileges no single fitter.
+  </aside>
 </section>
 
 <section id="divider-4" class="section-divider" data-state="is-section-divider">
@@ -753,25 +763,26 @@ Priority: fix /scratch perms c111+c113, then release user-02
 <section>
 <section id="iris-osg">
   <!-- IRIS-HEP / OSG-LHC upstream services (built from the doc) -->
-  <p class="kicker">The landscape question &middot; options, not a proposal</p>
-  <h2>What is site-specific, and what could be <span class="accent">common?</span></h2>
+  <p class="kicker">Options</p>
+  <h2>What could be <span class="accent">common?</span></h2>
   <div class="content">
-    <p>The <strong>governance model and interface patterns port</strong>; the policies, playbooks, and trust
-       surfaces stay local. In between sits a menu of candidates &mdash; each could become a WLCG activity,
-       an HSF-style community project, or stay experiment- and site-specific:</p>
     <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:8px;">
-      <div class="card"><h3 style="font-size:14pt;">Standardize the port</h3><p style="font-size:11.5pt;">a conformant facility-MCP interface profile &mdash; the way WLCG already standardizes site interfaces</p></div>
-      <div class="card teal"><h3 style="font-size:14pt;">Authorize the clients</h3><p style="font-size:11.5pt;">common conventions for agentic clients on WLCG tokens (client identity, token exchange, audit)</p></div>
-      <div class="card teal"><h3 style="font-size:14pt;">Share the knowledge</h3><p style="font-size:11.5pt;">a commons of runbooks and skills &mdash; single-source, reviewed, not a dozen forks</p></div>
-      <div class="card"><h3 style="font-size:14pt;">Operate together</h3><p style="font-size:11.5pt;">shared evaluation scenarios for ops agents; comparable trust ladders across sites</p></div>
+      <div class="card"><h3 style="font-size:14pt;">Standardize the port</h3><p style="font-size:11.5pt;">a conformant interface profile</p></div>
+      <div class="card teal"><h3 style="font-size:14pt;">Authorize the clients</h3><p style="font-size:11.5pt;">client conventions on WLCG tokens</p></div>
+      <div class="card teal"><h3 style="font-size:14pt;">Share the knowledge</h3><p style="font-size:11.5pt;">runbooks and skills, single-source</p></div>
+      <div class="card"><h3 style="font-size:14pt;">Operate together</h3><p style="font-size:11.5pt;">shared eval scenarios</p></div>
     </div>
     <div class="callout" style="margin-top:12px;">
-      <p>What likely <strong>doesn&rsquo;t</strong> need coordination: model choice, runtime choice, per-site
-         policy content. The question for this forum is <strong>which of the four &mdash; if any &mdash;
-         benefit from doing it together.</strong></p></div>
+      <p><strong>Which, if any, do we do together?</strong></p></div>
   </div>
   <div class="footnote"><a href="https://aarc-community.org/">AARC</a> &middot; <a href="https://eosc.eu/">EOSC</a> &middot; <a href="https://projectescape.eu/">ESCAPE</a> &middot; IRIS-HEP/OSG-LHC concepts doc.</div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud: the governance model and interface patterns PORT; policies,
+    playbooks, and trust surfaces stay local. Each candidate could become a WLCG activity, an HSF-style
+    community project, or stay experiment/site-specific. What likely does NOT need coordination: model
+    choice, runtime choice, per-site policy content. Card detail: the port = the way WLCG already
+    standardizes site interfaces; clients = identity, token exchange, audit; knowledge = reviewed, not
+    a dozen forks; operate = eval scenarios for ops agents across sites.
     Deliberately neutral: four candidates, laid out evenhandedly, with an explicit not-worth-coordinating
     list so the menu is credible. Sources: the IRIS-HEP/OSG-LHC concepts doc (conformant facility-MCP
     interface + conformance suite; RFC 8693 token exchange from WLCG/SciTokens to AI backends; the eval
@@ -784,24 +795,28 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="agenda-skills-commons">
-  <p class="kicker">Agenda &middot; where context lives</p>
+  <p class="kicker">Deep-dive &middot; the commons</p>
   <h2>One commons, not a <span class="accent">dozen forks</span></h2>
   <div class="content">
     <ul>
-      <li>Skills are the durable context layer &mdash; but who hosts them, who maintains them, and how do we stop every experiment forking the same skill?</li>
-      <li>A live debate in ATLAS right now: a <strong>single-source marketplace</strong> (reference skills by URL, fix upstream) vs duplicated copies; docs kept <em>next to the source code</em>; official, e-group-governed repos over personal ones. Still open: how to <em>link</em>, not copy (<a href="https://github.com/usatlas/marketplace/issues/60">usatlas/marketplace#60</a>).</li>
-      <li>As the library grows, <strong>semantic confusability</strong> bites (overlapping descriptions degrade routing) &rarr; skill-design guides + an <strong>eval/lint harness</strong> to keep skills orthogonal.</li>
-      <li>A third option worth watching: <strong>package skills like software</strong>. <a href="https://prefix.dev/channels/skill-forge">prefix.dev&rsquo;s skill-forge</a> distributes agent skills as versioned <strong>conda/pixi packages</strong> &mdash; lockfile discipline applied to context instead of code.</li>
+      <li>Who hosts, who maintains, who stops the forks?</li>
+      <li>ATLAS today: a <strong>single-source marketplace</strong>; reference, don&rsquo;t copy.</li>
+      <li>An <strong>eval/lint harness</strong> keeps skills orthogonal.</li>
     </ul>
     <div class="callout" style="margin-top:8px;">
-      <p>US ATLAS already operates a marketplace others are converging toward (following <a href="https://agentskills.io/">agentskills.io</a> practice).
-         The <strong>open question</strong> for WLCG: what is the cross-experiment, cross-region contribution to that
-         commons? <strong>ESCAPE is one model</strong> for how such a collaboration forms and persists. On the US
-         side, an <strong>AI proto-collaboration</strong> (umbrella over IRIS-HEP and other funded projects + research
-         groups, open to international collaborators) updated at <strong>DPF, July&nbsp;2026</strong>.</p></div>
+      <p><strong>Open:</strong> the cross-experiment contribution. <strong>ESCAPE</strong> is one model.</p></div>
   </div>
   <div class="footnote">US AI proto-collaboration update: <a href="https://indico.fnal.gov/event/72820/contributions/341339/">DPF 2026</a>.</div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud where useful: skills are the durable context layer. The live
+    ATLAS debate: single-source marketplace (reference skills by URL, fix upstream) vs duplicated
+    copies; docs next to the source code; official e-group-governed repos over personal ones; still
+    open how to LINK, not copy (usatlas/marketplace#60). Semantic confusability: overlapping
+    descriptions degrade routing — hence skill-design guides plus the eval/lint harness. Third option
+    worth watching: package skills like software — prefix.dev's skill-forge ships skills as versioned
+    conda/pixi packages, lockfile discipline for context. US ATLAS already operates the marketplace
+    others converge toward (agentskills.io practice); the US AI proto-collaboration is an umbrella over
+    IRIS-HEP and other funded projects + research groups, open to international collaborators.
     From the same AMG thread (Giordon, Zach Marshall, Gordon Watts, Tomas Dado, Giovanni). Points to draw
     on: single-source via marketplace.json/plugin.json — reference, don't duplicate (usatlas/marketplace#60);
     docs-next-to-source; official egroup-backed repos (Zach + Watts: CERN/AMG-hosted eventually, but US
@@ -820,15 +835,14 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 
 <section id="escape">
-  <p class="kicker">A bridge that already exists</p>
+  <p class="kicker">Deep-dive &middot; ESCAPE</p>
   <h2>The agentic layer, meet <span class="accent">ESCAPE</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:22px;">
       <div>
         <ul>
-          <li>ESCAPE&rsquo;s <strong>Data Lake</strong> (Rucio), <strong>VRE</strong> (k8s + Jupyter + REANA + CVMFS), and <strong>OSSR</strong> software registry — a multi-science analysis platform.</li>
-          <li>The hosted Rucio MCP <strong>already serves an <code>escape</code> site</strong>. The bridge is built; the agentic layer can sit on top of the VRE.</li>
-          <li>Multi-messenger by design: GW (Virgo), neutrinos (KM3NeT), dark matter (XENON), cosmic rays (Auger) — the same layer serves astroparticle science.</li>
+          <li><strong>Data Lake</strong> (Rucio), <strong>VRE</strong> (k8s, Jupyter, REANA), <strong>OSSR</strong>: multi-science.</li>
+          <li>The hosted Rucio MCP <strong>already serves an <code>escape</code> site</strong>.</li>
         </ul>
       </div>
       <div>
@@ -839,8 +853,8 @@ auth_host = https://vre-rucio-auth.cern.ch
 oidc_issuer = escape
 oidc_audience = rucio</code></pre>
         <div class="callout teal" style="margin-top:10px;">
-          <p style="font-size:12.5pt;">Bring the credential-brokered gateway + portable playbooks to the ESCAPE
-             VRE, so the same tooling serves LHC <em>and</em> astroparticle science &mdash; built once.</p>
+          <p style="font-size:12.5pt;">Gateway + playbooks on the VRE: built once, serves LHC
+             <em>and</em> astroparticle science.</p>
         </div>
       </div>
     </div>
@@ -848,6 +862,9 @@ oidc_audience = rucio</code></pre>
   <div class="footnote"><a href="https://github.com/kratsg/rucio-mcp/blob/main/src/rucio_mcp/data/escape.cfg">rucio-mcp/data/escape.cfg</a>.</div>
   <aside class="notes">
     BACKUP under the coordination slide: evidence the layer crosses sciences, not just LHC experiments.
+    Cut bullet, say aloud: multi-messenger by design — GW (Virgo), neutrinos (KM3NeT), dark matter
+    (XENON), cosmic rays (Auger); the same layer serves astroparticle science. The bridge is built;
+    the agentic layer sits on top of the VRE.
     Key honest facts: ESCAPE = ESFRI cluster (H2020 GA 824064), now an "Open Collaboration"; its VRE
     stack (Rucio/REANA/k8s) overlaps exactly with the AF's. The escape.cfg snippet is the actual shipped
     config file, not a mockup — unfakeable evidence, same trick as the OIDC-sites screenshot earlier.
@@ -858,24 +875,24 @@ oidc_audience = rucio</code></pre>
 
 <section>
 <section id="agenda-equity">
-  <p class="kicker">Agenda &middot; equitable access to inference</p>
-  <h2>Who gets to use the models — and <span class="accent">who pays?</span></h2>
+  <p class="kicker">Equitable inference</p>
+  <h2><span class="accent">Who pays</span> for inference?</h2>
   <div class="content">
     <ul>
-      <li>If agentic analysis becomes normal, <strong>access to inference becomes a fairness issue</strong>:
-        a credit-card-per-student model entrenches inequality between groups and countries.</li>
-      <li>A facility can <strong>host open-weight models on its own GPUs</strong> (<a href="https://nrp.ai/">NRP</a>-style) for equitable, cost-controlled baseline access&hellip;</li>
-      <li>&hellip;and <strong>host the foundational models experiments depend on</strong>, so reconstruction/inference services aren&rsquo;t hostage to a single vendor or budget line.</li>
-      <li><strong>Bridge identity, don&rsquo;t fork it:</strong> exchange a scientist&rsquo;s WLCG/SciTokens credential for a scoped token an inference backend accepts (OAuth&nbsp;2.0 Token Exchange, <a href="https://www.rfc-editor.org/rfc/rfc8693">RFC&nbsp;8693</a>) &mdash; MCP-aware, so it scopes which models <em>and</em> which tools.</li>
+      <li><strong>Credit-card-per-student</strong> entrenches inequality, between groups and countries.</li>
+      <li>Host <strong>open-weight models</strong> on facility GPUs (<a href="https://nrp.ai/">NRP</a>-style).</li>
+      <li>Bridge identity: WLCG token &rarr; scoped inference token (<a href="https://www.rfc-editor.org/rfc/rfc8693">RFC&nbsp;8693</a>).</li>
     </ul>
     <div class="callout" style="margin-top:8px;">
-      <p>This is squarely a <strong>computing-infrastructure responsibility</strong>: GPUs, model hosting, and
-         a fair-share policy are facility decisions, not personal ones. The cost is already real &mdash; a full
-         agentic analysis runs to <strong>~1M+ tokens</strong> <span class="text-muted">(illustrative)</span>,
-         tens to hundreds of dollars per run at frontier rates (numbers below).</p></div>
+      <p>A <strong>facility responsibility</strong>: GPUs, model hosting, fair-share policy.</p></div>
   </div>
   <div class="footnote">Agents already perform full HEP analyses end-to-end &mdash; Moreno et&nbsp;al., arXiv:2603.20179 &mdash; and that run kept stalling on usage rate-limits: access is already the binding constraint.</div>
   <aside class="notes">
+    Cut for the 40-word rule, say aloud: if agentic analysis becomes normal, access to inference is a
+    fairness issue. Hosting foundational models the experiments depend on keeps reconstruction/inference
+    services from being hostage to a single vendor or budget line. The token exchange (RFC 8693) is
+    MCP-aware — it scopes which models AND which tools. The cost is already real: tens to hundreds of
+    dollars per run at frontier rates, numbers in the down-arrow.
     The brief's "equitable access to LLMs through hosting open-models + hosting foundational models used
     by experiments." Tie to the model-swap slide (§2): self-hosting open weights was already framed as
     cost control; here it becomes EQUITY. NRP-hosted LLMs (nrp.ai/llms) as the precedent.
@@ -891,14 +908,11 @@ oidc_audience = rucio</code></pre>
 
 <section id="agenda-equity-cost">
   <!-- DEEP-DIVE / BACKUP : per-run inference cost spread -->
-  <p class="kicker">Deep-dive &middot; what a run costs</p>
+  <p class="kicker">Deep-dive &middot; cost</p>
   <h2>Per analysis: <span class="accent">tens to hundreds</span> of dollars</h2>
   <div class="content">
     <div class="callout" style="margin:0 0 14px;">
-      <p style="font-size:12.5pt;"><strong>My illustrative floor</strong>, not from the paper: one agentic
-         analysis &asymp; ~1M input + 1M output tokens (code-gen &asymp; 1:1) at list prices. A real analysis
-         can run much higher. Moreno et&nbsp;al. report only a subscription tier + wall-clock, not a per-run
-         token cost.</p></div>
+      <p style="font-size:12.5pt;"><strong>Illustrative:</strong> ~1M in + 1M out tokens per analysis.</p></div>
     <div style="display:grid; grid-template-columns: 290px 1fr; gap:12px 14px; align-items:center; font-size:13.5pt;">
       <p style="margin:0; text-align:right;">Frontier <span class="text-muted" style="font-size:11pt;">(hosted)</span></p>
       <div style="display:flex; align-items:center; gap:10px;"><span style="display:inline-block; height:18px; width:560px; background:var(--maroon); border-radius:3px;"></span><strong>$100&ndash;200+</strong></div>
@@ -908,8 +922,7 @@ oidc_audience = rucio</code></pre>
       <div style="display:flex; align-items:center; gap:10px;"><span style="display:inline-block; height:18px; width:14px; background:var(--teal); border-radius:3px;"></span><strong>GPU time only</strong></div>
     </div>
     <div class="callout teal" style="margin-top:16px;">
-      <p>Self-hosting <strong>open weights</strong> on facility GPUs collapses the per-run cost to ~GPU time &mdash;
-         the equity lever. A credit-card-per-student model does the opposite, between groups and between countries.</p></div>
+      <p>Self-hosted <strong>open weights</strong>: ~GPU time. <strong>The equity lever.</strong></p></div>
   </div>
   <div class="footnote">Tiers from per-Mtok list prices (input&nbsp;+&nbsp;output) via the <a href="https://www.aipricing.guru/calculators/token-cost/">AI token pricing calculator</a>, ballpark; the 1M&nbsp;+&nbsp;1M budget is illustrative. Agents already run analyses end-to-end: Moreno et&nbsp;al., arXiv:2603.20179.</div>
   <aside class="notes">
@@ -925,32 +938,36 @@ oidc_audience = rucio</code></pre>
 </section>
 
 <section id="discuss">
-  <p class="kicker">Not engineering tickets &mdash; research questions</p>
+  <p class="kicker">Research questions</p>
   <h2>What we don&rsquo;t know <span class="accent">yet</span></h2>
   <div class="content">
-    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:22px 30px;">
+    <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:26px 30px; margin-top:10px;">
       <div style="border-left:3px solid var(--maroon); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-sitemap" style="color:var(--maroon);"></i> <strong>How should facilities expose context?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">One MCP per service or a gateway delegating identity? DCR or CIMD? Where does a site&rsquo;s audit live?</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-sitemap" style="color:var(--maroon);"></i> <strong>How should facilities expose context?</strong></p></div>
       <div style="border-left:3px solid var(--teal); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-map-location-dot" style="color:var(--teal);"></i> <strong>How do we share context between facilities?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">Shipped with the facility, or a shared commons? Single-source vs forks; eval/lint for orthogonality; who keeps it true?</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-map-location-dot" style="color:var(--teal);"></i> <strong>How do we share it?</strong></p></div>
       <div style="border-left:3px solid var(--maroon); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-shield-halved" style="color:var(--maroon);"></i> <strong>How do we evaluate &mdash; and secure &mdash; an autonomous operator?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">Human gates, k8s vs bubblewrap/eBPF isolation, credential brokering so agents never hold raw secrets, a trust ladder with an eval-harness promotion gate.</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-shield-halved" style="color:var(--maroon);"></i> <strong>Evaluating an autonomous operator?</strong></p></div>
       <div style="border-left:3px solid var(--teal); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-box" style="color:var(--teal);"></i> <strong>What makes an environment truly portable?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">pixi-native batch as the default? Supply-chain policy for conda-forge?</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-box" style="color:var(--teal);"></i> <strong>What makes environments portable?</strong></p></div>
       <div style="border-left:3px solid var(--maroon); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-coins" style="color:var(--maroon);"></i> <strong>Who pays for inference, and is that fair?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">Hosted frontier vs self-hosted open weights on facility GPUs; equity as policy.</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-coins" style="color:var(--maroon);"></i> <strong>Who pays for inference?</strong></p></div>
       <div style="border-left:3px solid var(--teal); padding-left:13px;">
-        <p style="margin:0; font-size:14.5pt;"><i class="fa-solid fa-globe" style="color:var(--teal);"></i> <strong>What becomes standardized, across sciences?</strong></p>
-        <p style="font-size:12pt; margin:3px 0 0;">A commons spanning AFs, LHC experiments, and astroparticle (KM3NeT, Virgo, XENON) via ESCAPE &mdash; where&rsquo;s the facility/experiment line?</p></div>
+        <p style="margin:0; font-size:15pt;"><i class="fa-solid fa-globe" style="color:var(--teal);"></i> <strong>What standardizes, across sciences?</strong></p></div>
     </div>
-    <p class="text-center" style="margin-top:14px; font-size:15pt;"><strong>Our bet:</strong> the model and runtime are the easy part. <span class="text-maroon"><strong>Context, identity, trust, and equity</strong></span> are the facility&rsquo;s homework.</p>
+    <p class="text-center" style="margin-top:22px; font-size:15pt;"><span class="text-maroon"><strong>Context, identity, trust, equity</strong></span>: the facility&rsquo;s homework.</p>
   </div>
   <aside class="notes">
+    Question detail, spoken (cut for the 40-word rule): expose = one MCP per service or a gateway
+    delegating identity, DCR or CIMD, where does a site's audit live; share = shipped with the facility
+    or a shared commons, single-source vs forks, eval/lint for orthogonality, who keeps it true;
+    evaluate/secure = human gates, k8s vs bubblewrap/eBPF isolation, credential brokering so agents
+    never hold raw secrets, a trust ladder with an eval-harness promotion gate; portable = pixi-native
+    batch as default, supply-chain policy for conda-forge; who pays = hosted frontier vs self-hosted
+    open weights, equity as policy; standardize = a commons spanning AFs, LHC, and astroparticle
+    (KM3NeT, Virgo, XENON) via ESCAPE — where's the facility/experiment line. Closing line in full:
+    our bet — the model and runtime are the easy part; context, identity, trust, and equity are the
+    facility's homework.
     Explicitly RESEARCH questions, not engineering tickets — this is the slide to leave up as discussion
     opens. The six questions map back onto the talk's sections so the room can re-enter any thread. If
     running long, land the closing line and open the floor from here.
@@ -961,34 +978,25 @@ oidc_audience = rucio</code></pre>
   <p class="kicker">Thank you</p>
   <h2>Two trust problems, one <span class="accent">facility layer</span></h2>
   <div class="content">
-    <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:28px;">
-      <div>
-        <p><strong>On</strong> the facility: agents earn privileged operations the way a new operator would &mdash;
-           runbooks in git, three governance levels, reviewable memory, dual enforcement.
-           <strong>Through</strong> it: the whole facility behind one credential-brokered gateway,
-           self-service for ~800 users, and the client never holds a secret.</p>
-        <p class="text-muted" style="font-size:13pt; margin-top:10px;">A team effort at UChicago (the AF team and MANIAC Lab).</p>
-      </div>
-      <div class="callout teal">
-        <p class="label">Pointers</p>
-        <ul style="margin:2px 0;">
-          <li><a href="https://github.com/maniaclab/af-mcp-platform">github.com/maniaclab/af-mcp-platform</a></li>
-          <li><a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/usatlas/marketplace">usatlas/marketplace</a></li>
-          <li><a href="https://usatlas.github.io/af-docs/ai">AF AI docs</a> &middot; <a href="https://github.com/EOSC-synergy/ssh-oidc">ssh-oidc</a> (EOSC-synergy) &middot; <a href="https://pixi.sh">pixi.sh</a></li>
-        </ul>
-      </div>
-    </div>
-    <p class="text-center text-maroon" style="font-size:16.5pt; font-weight:600; margin-top:18px;">We don&rsquo;t think every site should build its own AI platform.<br>The question for this forum: <span class="accent">which parts of this layer do we build together?</span></p>
-    <div style="border-top:1px solid var(--line-color); margin-top:16px; padding-top:12px;">
-      <p style="margin:0; font-size:13.5pt;"><strong>Hear more &mdash; demos &amp; talks on this + MCPs for the AF, by Giordon Stark:</strong><br>
-         <span style="font-size:12.5pt;"><a href="https://indico.cern.ch/event/1714565/">AMG Weekly, Sep&nbsp;4</a> &middot;
+    <p style="margin-top:8px;"><strong>On</strong>: trust earned in git.
+       <strong>Through</strong>: one brokered gateway, ~800 users, no client secrets.</p>
+    <p class="text-center text-maroon" style="font-size:17pt; font-weight:600; margin-top:26px;"><span class="accent">Which parts do we build together?</span></p>
+    <div style="border-top:1px solid var(--line-color); margin-top:24px; padding-top:12px;">
+      <p style="margin:0; font-size:13.5pt;"><strong>Giordon Stark:</strong>
+         <span style="font-size:12.5pt;"><a href="https://indico.cern.ch/event/1714565/">AMG Weekly</a> &middot;
          <a href="https://indico.nikhef.nl/event/7873/">PyHEP.dev 2026</a> &middot;
          <a href="https://indico.cern.ch/event/1698548/">IRIS-HEP retreat</a> &middot;
          <a href="https://indico.global/event/18639/">CLARIPHY</a></span></p>
     </div>
   </div>
-  <div class="footnote">Gardner &middot; Stark &middot; Vukotic &middot; Hu &middot; UChicago &middot; WLCG OTF #12 &middot; 2026&#8209;08&#8209;25.</div>
+  <div class="footnote"><a href="https://github.com/maniaclab/af-mcp-platform">af-mcp-platform</a> &middot; <a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/usatlas/marketplace">usatlas/marketplace</a> &middot; <a href="https://usatlas.github.io/af-docs/ai">AF AI docs</a> &middot; <a href="https://github.com/EOSC-synergy/ssh-oidc">ssh-oidc</a> &middot; <a href="https://pixi.sh">pixi.sh</a> &middot; Gardner &middot; Stark &middot; Vukotic &middot; Hu &middot; UChicago &middot; WLCG OTF #12 &middot; 2026&#8209;08&#8209;25.</div>
   <aside class="notes">
+    Say the summary in full (trimmed for the 40-word rule): ON the facility, agents earn privileged
+    operations the way a new operator would — runbooks in git, three governance levels, reviewable
+    memory, dual enforcement. THROUGH it, the whole facility behind one credential-brokered gateway,
+    self-service for ~800 users, and the client never holds a secret. Full closing line: we don't
+    think every site should build its own AI platform — the question for this forum is which parts
+    of this layer we build together. Pointers moved to the footnote.
     Deliver the closing question slowly, then stop talking — it hands the microphone to the forum, which
     is the point of an OTF. Credit the wider team in speech: Judith Stephen (HTCondor), Aidan Rosberg,
     Farnaz Golnaraghi, David Jordan, and the AF user community. Point at the strip: Giordon is demoing
