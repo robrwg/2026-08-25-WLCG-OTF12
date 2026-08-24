@@ -87,11 +87,11 @@
   <aside class="notes">
     This is the spine of the whole talk; everything later is evidence or consequence.
     Deliver it as a thesis, then promise the structure: (1) a short existence proof from one WLCG
-    site, (2) the physicist's view — laptop to facility through a credential-brokered gateway, (3)
-    the sysadmin's view — how an agent earns trust for privileged actions and how we stay able to
-    see what it knows, and (4) the WLCG question: what here, if anything, is worth coordinating.
-    Map to the charge out loud once: (2) is data-management and interfaces, (3) is site operations,
-    troubleshooting, and security. Keep this slide tight; it's the frame, not the evidence.
+    site, (2) the sysadmin's view — monitoring, privileged operations, and the trust principles
+    that let an agent earn them, (3) the physicist's view — laptop to facility through a
+    credential-brokered gateway, and (4) the WLCG question: what here, if anything, is worth
+    coordinating. Map to the charge out loud once: (2) is site operations, troubleshooting, and
+    security, (3) is data-management and interfaces. Keep this slide tight; it's the frame.
   </aside>
 </section>
 
@@ -191,15 +191,15 @@
 Total held: 825 / 2395 (34%) &mdash; above threshold
 
  #  User      Held  Cause                    Action
- 1  jiahaoh    284  PERIODIC_HOLD >7d wall   Restructure, resubmit
- 2  aukiefer   165  errno 13: /scratch/      Fix node perms, release
+ 1  user-01    284  PERIODIC_HOLD >7d wall   Restructure, resubmit
+ 2  user-02    165  errno 13: /scratch/      Fix node perms, release
                     perms c111,c113          (node bug &mdash; blameless)
- 3  abercaru   155  PERIODIC_HOLD >7d wall   Restructure, resubmit
- 4  alheld     121  Short queue >4h          Split &lt;4h chunks
- 5  lzheng      65  errno 2: .tgz missing    Investigate, resubmit
+ 3  user-03    155  PERIODIC_HOLD >7d wall   Restructure, resubmit
+ 4  user-04    121  Short queue >4h          Split &lt;4h chunks
+ 5  user-05     65  errno 2: .tgz missing    Investigate, resubmit
 
 Wall-time holds: 560/825 (68%) &mdash; three users, policy issue
-Priority: fix /scratch perms c111+c113, then release aukiefer
+Priority: fix /scratch perms c111+c113, then release user-02
 (the agent does NOT do this autonomously)</code></pre>
       <div>
         <ul style="font-size:12.5pt;">
@@ -215,7 +215,8 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
     </div>
   </div>
   <aside class="notes">
-    Backup under the levels slide, for the ops crowd. This is a real run from April 1, 2026 on the AF.
+    Backup under the levels slide, for the ops crowd. This is a real run from April 1, 2026 on the AF
+    (usernames anonymized for the public deck).
     The two errors the expert caught at launch are the feature, not the bug: the review loop is where
     the runbook improves, and the agent's report format was corrected the same day. Next steps then were
     the Slack alert (now live, see the main slide's screenshots) and conditional release after the
@@ -224,172 +225,9 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
 </section>
 </section>
 
-<section id="theme-trust">
-  <div class="theme-lead">
-    <p class="theme-num">Part 2 of 3 &middot; AI acting <em>through</em> the facility</p>
-    <h2 style="border-bottom:none; padding-bottom:0;">The physicist&rsquo;s view: <span class="accent">laptop &rarr; facility</span></h2>
-    <p class="theme-thesis">The physicist of the near future hardly leaves the coding environment on their
-       laptop. The facility&rsquo;s job is a <strong>safe port to plug an agent into</strong> &mdash; who it is,
-       what it may touch, and how every call is audited.</p>
-    <p class="theme-covers">The MCP broker &middot; pipelines from the laptop &middot; identity.</p>
-  </div>
-  <aside class="notes">Thesis to say: the physicist stays in their own coding environment; the facility's
-    job is to be safely pluggable. One connector, like USB-C: the same socket regardless of which agent
-    or model is on the other end. Covers the broker, intent-level pipelines, and identity.</aside>
-</section>
-
-<section id="agenda-gateway">
-  <p class="kicker">The physicist&rsquo;s view &middot; the USB-C port of the facility</p>
-  <h2>A credential-brokered <span class="accent">MCP gateway</span></h2>
-  <div class="content">
-    <p style="margin-bottom:2px;">One standard socket in front of the facility&rsquo;s services. The LLM client
-       <strong>never holds raw credentials</strong>; the broker authenticates the user, mints short-lived
-       per-service credentials, and audits every tool call.</p>
-    <div style="text-align:center; margin:6px 0 4px;">
-      <img src="images/NEW-af-mcp-arch.svg" alt="Claude, Gemini or any MCP client to the mcp.af.uchicago.edu front door (oauth2-proxy, AF Keycloak OIDC), through a FastMCP aggregator and AF credential broker (FastAPI /v1) doing identity, authZ, credential brokering and audit, fanning out to rucio-mcp, ami-mcp, openmagic, panda-mcp, condor-mcp, gitlab-mcp, jupyter-control and an Nth backend with no code change" style="max-width:100%; max-height:315px;">
-    </div>
-    <div class="callout teal" style="margin-top:4px;">
-      <p style="font-size:13.5pt;">The <strong>strategic boundary</strong>: identity, authZ, credential brokering, and audit in one
-         place &mdash; the same boundary a site needs regardless of AI. Live at
-         <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s <strong>af-mcp-platform</strong>.</p></div>
-  </div>
-  <div class="footnote"><a href="https://github.com/kratsg/af-mcp-platform">af-mcp-platform</a> &middot; <a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/atlas-outreach-data-tools/atlasopenmagic-mcp">atlasopenmagic</a> &middot; <a href="https://panda-wms.readthedocs.io/en/latest/advanced/mcp.html">panda-mcp</a> &middot; <a href="https://indico.cern.ch/event/1471803/contributions/6967102/">condor-mcp</a> (Bockelman, CHEP&nbsp;2026).</div>
-  <aside class="notes">
-    THE highlighted named artifact of the talk: Giordon's af-mcp-platform (github.com/kratsg/af-mcp-platform),
-    the new way to interface with the AF. Say the USB-C line out loud: one standard socket, any device on
-    the other end; the facility standardizes the port, not the laptop. Real numbers: ~800 users,
-    single endpoint mcp.af.uchicago.edu, brokers to Rucio/PanDA/AMI/GitLab/Jupyter/HTCondor.
-    DEEP-DIVE backup = the topology slide (next, down-arrow).
-    Diagram is images/NEW-af-mcp-arch.svg: client (bearer token only) -> mcp.af.uchicago.edu
-    (oauth2-proxy -> AF Keycloak OIDC) -> FastMCP aggregator + AF credential broker (FastAPI /v1;
-    Identity / AuthZ / Credential brokering / Audit) -> rucio-mcp, ami-mcp, openmagic (theory/MC gen),
-    panda-mcp, condor-mcp, gitlab-mcp, jupyter-control, Nth backend (no code change).
-    Say out loud: the broker is the ONLY thing that ever touches raw x509/IAM; the client just
-    carries a short-lived bearer token. Deployed via Flux CD/Helm; portal at
-    portal.af.uchicago.edu/tokens issues the bearer tokens. ~800 users behind the one endpoint.
-  </aside>
-</section>
-
-<section>
-<section id="arch-intent">
-  <p class="kicker">The physicist&rsquo;s view &middot; pipelines from the laptop</p>
-  <h2>The agent speaks <span class="accent">intent</span>, the facility wires the backend</h2>
-  <div class="content">
-    <p style="margin-bottom:4px;">A whole pipeline driven from the
-       physicist&rsquo;s own coding environment, through the broker, to one facility or several:</p>
-    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:6px 0;">
-      <p class="node fill" style="font-size:14pt;">data_tool<span class="sub">&ldquo;get this dataset + metadata&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">transform_tool<span class="sub">&ldquo;turn inputs into histograms&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">batch_tool<span class="sub">&ldquo;run across the cluster&rdquo;</span></p>
-      <p class="node fill" style="font-size:14pt;">inference_tool<span class="sub">&ldquo;fit and get a limit&rdquo;</span></p>
-    </div>
-    <p class="text-center text-maroon" style="font-size:20pt; margin:2px;"><i class="fa-solid fa-arrows-down-to-line"></i></p>
-    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:6px;">
-      <div class="card teal"><p style="font-size:12.5pt;">Rucio &middot; dCache &middot; Open Data</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">coffea &middot; uproot &middot; ServiceX</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">HTCondor &middot; Slurm &middot; Dask &middot; REANA</p></div>
-      <div class="card teal"><p style="font-size:12.5pt;">pyhf &middot; cabinetry &middot; RooFit &middot; SBI</p></div>
-    </div>
-    <p class="text-muted" style="font-size:12pt; margin-top:10px;"><code>inference_tool</code> privileges no single fitter: <strong>HS3</strong> (HEP Statistics Serialization Standard) + <code>pyhs3</code> are the bridge between pyhf and RooFit.</p>
-    <div class="callout" style="margin-top:12px;">
-      <p>The agent never names &ldquo;coffea&rdquo; or &ldquo;condor.&rdquo; That indirection is exactly what lets the
-         <strong>same agent move between facilities and experiments</strong>.</p></div>
-  </div>
-  <aside class="notes">
-    The laptop-first story: the physicist never opens a facility UI; the agent calls intent-level
-    tools and the facility's playbook maps them to the local backends. Because the mapping is
-    facility-side, the same laptop plugs into a second facility by adding a second broker endpoint —
-    say that sentence out loud, it's the multi-facility punchline. The HS3/pyhs3 line pre-empts the
-    stats-interop question: the inference abstraction does not privilege one fitter.
-    Down-arrow: the "no context — stay quiet" honesty beat (Lustre-vs-Ceph) if the room wants it.
-  </aside>
-</section>
-
-<section id="arch-quiet">
-  <p class="kicker">Core insight &middot; flip side</p>
-  <h2>No context? It should <span class="accent">stay quiet</span></h2>
-  <div class="content">
-    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What actually happened</p>
-      <p>Our cluster agents confidently recommended <strong>Lustre</strong> tuning for a filesystem that is
-         actually <strong>Ceph</strong>. Zero Ceph context. Plausible, fluent, and wrong.</p></div>
-    <div class="callout teal" style="margin-top:14px;">
-      <p>The rule we adopted: <strong>ungrounded &rarr; silent</strong>. Context isn&rsquo;t only what makes an
-         agent useful; it&rsquo;s what makes it <em>safe to trust</em>. This is why "who keeps the context true"
-         is a real infrastructure question, not bookkeeping.</p></div>
-  </div>
-  <aside class="notes">Keep — it's the honesty beat and it sets up the trust/maintenance open questions. Real quotes
-  from Judith/Farnaz can stay or be paraphrased.</aside>
-</section>
-</section>
-
-<section>
-<section id="agenda-identity">
-  <p class="kicker">The physicist&rsquo;s view &middot; identity is the bottleneck</p>
-  <h2>Who is this <span class="accent">client</span>, and may it act as you?</h2>
-  <div class="content">
-    <p>Every MCP client &mdash; Claude, an internal tool, something a student wrote &mdash; wants to connect.
-       Once agents are the ones connecting, this stops being a one-time setup step and becomes a
-       <strong>continuous, scalable decision</strong>:</p>
-    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin:16px 0;">
-      <div class="node fill" style="font-size:14pt;">Who is it?<span class="sub">a durable identity, not just a name</span></div>
-      <div class="node fill" style="font-size:14pt;">Do we trust it?<span class="sub">policy, not vibes</span></div>
-      <div class="node fill" style="font-size:14pt;">How much authority?<span class="sub">scoped, auditable</span></div>
-    </div>
-    <div class="callout teal">
-      <p><strong>Identity is becoming the bottleneck</strong>, not an afterthought &mdash; and WLCG&rsquo;s
-         x509&rarr;OIDC transition is the backdrop. Today, most clients register the way <a href="https://www.rfc-editor.org/rfc/rfc7591">DCR</a>
-         prescribes &mdash; the adopted, stateful mechanism. A newer <strong>draft</strong> spec,
-         <a href="https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-02.html">CIMD</a>,
-         proposes something stateless instead (a client&rsquo;s identity as a URL the server fetches) &mdash; worth
-         watching, not yet the default. This sits <em>on top of</em> the community&rsquo;s federated-identity work
-         &mdash; WLCG token profiles, the <a href="https://aarc-community.org/">AARC</a> blueprint, IAM &mdash;
-         not instead of it.</p></div>
-  </div>
-  <aside class="notes">
-    SIMPLIFIED main line (moved DCR/CIMD jargon to the two backups) — for a mixed colloquium room, the
-    memorable takeaway is "identity becomes the bottleneck," not "DCR vs CIMD." Say the three questions
-    out loud as the research problem. IMPORTANT ACCURACY NOTE: don't imply CIMD is "the solution" — DCR is
-    what's actually adopted today (an approved RFC, what OIDC-based MCP clients follow in practice); CIMD is
-    still an IETF draft, not yet a real-world default, even though the MCP spec itself prefers it (SHOULD vs
-    MAY). Frame CIMD as "a newer proposal worth watching," not "the standard." AARC/WLCG line matters for
-    Groep/Campana in the room. This is a place to shape the standard, not just consume it — a facility/Tier-1
-    voice in how research infrastructure adopts client-identity models.
-    Full DCR-vs-CIMD mechanics + the real trace are the two backups (down-arrow) if pressed.
-  </aside>
-</section>
-
-<section id="agenda-identity-deepdive">
-  <!-- DEEP-DIVE / BACKUP : CIMD mechanics -->
-  <p class="kicker">Deep-dive &middot; CIMD vs DCR</p>
-  <h2>Client ID = a URL the server fetches</h2>
-  <div class="content">
-    <pre><code class="block">GET /authorize?client_id=https://app.example/oauth.json&amp;…
-        │  authn server fetches the JSON, validates, applies policy
-        ▼
-{ "client_id":"https://app.example/oauth.json",
-  "client_name":"…","redirect_uris":[…] }   ← hosted by the client</code></pre>
-    <ul style="font-size:13pt;">
-      <li><strong>Wins:</strong> no <code>/register</code> abuse surface; stable identity per app; domain-based allow/deny.</li>
-      <li><strong>Costs:</strong> server makes outbound fetches &rarr; <strong>SSRF</strong> risk (block private IPs, HTTPS-only, size/timeout caps); localhost ambiguity; domain &ne; trust.</li>
-    </ul>
-    <p class="text-muted" style="font-size:12pt; margin-top:8px;">Concretely in FastMCP: <code>CIMDTrustPolicy(trusted_domains=["claude.ai","cursor.com"], auto_approve_trusted=True)</code> &mdash; the facility decides which domains skip consent.</p>
-  </div>
-  <div class="footnote">Auth today reuses grid creds (x509) or Keycloak OIDC &mdash; <a href="https://github.com/kratsg/rucio-mcp/blob/main/docs/rucio-oauth-bridge.md">OAuth bridge docs</a>.</div>
-  <aside class="notes">BACKUP. The client_id IS the HTTPS URL to a metadata doc the client hosts; the authn server
-  fetches it on demand, validates client_id == source URL and the redirect_uris, then applies its own
-  policy. Read-only, stateless, fetch-on-demand. Spec status: adopted into MCP 2025-11-25 via SEP-991,
-  from an IETF draft promoted to WG status Oct 2025 (origins in IndieAuth; in production at Bluesky);
-  MCP Python SDK added minimal client-side support in v1.23.0, server-side still maturing. Stance:
-  CIMD = SHOULD, DCR = MAY, pre-registration still allowed. Software statements (RFC 7591 §2.3) / OS
-  attestation are the next layer if asked. The second backup (down-arrow) has a real trace, the actual
-  Claude client_id URLs, and the full spec list — pull that up only if someone like Groep or Campana
-  pushes on mechanics.</aside>
-</section>
-</section>
-
 <section id="theme-ops">
   <div class="theme-lead">
-    <p class="theme-num">Part 3 of 3 &middot; AI acting <em>on</em> the facility</p>
+    <p class="theme-num">Part 2 of 3 &middot; AI acting <em>on</em> the facility</p>
     <h2 style="border-bottom:none; padding-bottom:0;">The sysadmin&rsquo;s view: earning trust for <span class="accent">privileged actions</span></h2>
     <p class="theme-thesis">The actions that matter are the ones an admin does with privileges. An agent gets
        them only the way a new human operator would: <strong>incrementally, observed, and revocable</strong> &mdash;
@@ -566,7 +404,7 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
       <i class="fa-solid fa-arrow-right text-maroon"></i>
       <div class="node fill" style="font-size:13.5pt;">Sandbox<span class="sub">off k8s: bubblewrap, sydbox</span></div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
-      <div class="node teal" style="font-size:13.5pt;">Policy<span class="sub">eBPF-class, fine-grained</span></div>
+      <div class="node teal" style="font-size:13.5pt;">Policy<span class="sub">fine-grained, node-level</span></div>
       <i class="fa-solid fa-arrow-right text-maroon"></i>
       <div class="node teal" style="font-size:13.5pt;">Privilege<span class="sub">earned, human-gated</span></div>
     </div>
@@ -582,14 +420,11 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
     </div>
   </div>
   <aside class="notes">
-    SIMPLIFIED to a visual flow per review feedback — the paragraph-heavy version buried the shape. Say each
-    step out loud: pods are the k8s default (resource caps, network policy, no host access); off k8s,
-    bubblewrap (the Flatpak sandbox — <a href="https://github.com/containers/bubblewrap">containers/bubblewrap</a>,
-    cf. <a href="https://flatpak.org/">flatpak.org</a>) or sydbox fence files/network/hardware on bare login
-    nodes (cf. "blaude", a bubblewrapped Claude — <a href="https://github.com/c0ffee0wl/blaude">c0ffee0wl/blaude</a>);
-    policy is the fine-grained eBPF-class layer (next backup); privilege is the trust ladder (next slide) —
-    this flow previews it. ENRICHED from the OSG-Consortium Slack thread (Giordon × Lincoln Bryant × Greg
-    Thain). A system-wide /etc/claude-code/CLAUDE.md + permission allow/deny is stronger than "notes" but is
+    Say each step out loud: pods are the k8s default (resource caps, network policy, no host access);
+    off k8s, sandboxes like bubblewrap or sydbox fence files/network/hardware on bare login nodes;
+    policy is the fine-grained node-level layer (policy engines — keep it high-level, details are not
+    my lane); privilege is earned, per the trust ladder earlier in this section.
+    A system-wide /etc/claude-code/CLAUDE.md + permission allow/deny is stronger than "notes" but is
     NOT kernel-level enforcement; cf. claude-code issue #70184 (can't reliably deny commands at user level).
     Lincoln's line: "Claude lets users 100x the same bad behaviour we've had for 30 years" — good honest
     laugh beat, attribute lightly if asked. The meme in the corner is the punchline for that line — let it
@@ -598,58 +433,6 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
     held-job email agent hit
     a race condition once — two agents grabbed the same approval and it nearly double-sent — so we stood
     email-sending down until it was fixed. Human-in-the-loop gates caught it; "honest over flawless."
-  </aside>
-</section>
-
-<section id="agenda-sandbox-policy">
-  <!-- DEEP-DIVE / BACKUP : policy engines, eBPF hooks, observability -->
-  <p class="kicker">Deep-dive &middot; how do you actually enforce it?</p>
-  <h2>Pods, cgroups, and <span class="accent">eBPF</span></h2>
-  <div class="content">
-    <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap:20px; align-items:start;">
-      <div>
-        <div class="card" style="margin-bottom:10px;"><h3 style="font-size:14.5pt;">Coarse: containers / cgroups</h3>
-          <p style="font-size:12pt;">Resource isolation (CPU/mem/io), bind-mounts to hide paths, seccomp to drop syscalls. Blunt but simple.</p></div>
-        <div class="card teal"><h3 style="font-size:14.5pt;">Fine: eBPF</h3>
-          <p style="font-size:12pt;">Sandboxed kernel programs attached to a hook point &mdash; a syscall, a kernel tracepoint, a kprobe/uprobe almost anywhere. Tetragon, Falco, bpflock.</p></div>
-      </div>
-      <div style="text-align:center;">
-        <svg viewBox="0 0 380 260" style="max-width:100%; max-height:240px;">
-          <rect x="10" y="10" width="360" height="60" rx="8" fill="#2D3748"/>
-          <text x="190" y="35" text-anchor="middle" fill="#fff" font-size="14" font-weight="600" font-family="Inter,Helvetica,sans-serif">User-space process</text>
-          <text x="190" y="55" text-anchor="middle" fill="#CBD2DC" font-size="11" font-family="Inter,Helvetica,sans-serif">agent, shell, tool call</text>
-          <line x1="190" y1="70" x2="190" y2="96" stroke="#5C0000" stroke-width="2"/>
-          <text x="205" y="86" fill="#6B6B6B" font-size="10" font-family="Inter,Helvetica,sans-serif" font-style="italic">syscall / tracepoint</text>
-          <rect x="30" y="98" width="320" height="46" rx="8" fill="#800000"/>
-          <text x="190" y="126" text-anchor="middle" fill="#fff" font-size="13" font-weight="600" font-family="Inter,Helvetica,sans-serif">Hook point (kernel)</text>
-          <line x1="190" y1="144" x2="190" y2="168" stroke="#5C0000" stroke-width="2"/>
-          <rect x="55" y="170" width="270" height="80" rx="10" fill="#e4f0f1" stroke="#1F6F78" stroke-width="2"/>
-          <text x="190" y="194" text-anchor="middle" fill="#1A1A1A" font-size="12.5" font-weight="700" font-family="Inter,Helvetica,sans-serif">eBPF program</text>
-          <text x="190" y="212" text-anchor="middle" fill="#1A1A1A" font-size="10.5" font-family="Inter,Helvetica,sans-serif">verified, sandboxed, JIT-compiled</text>
-          <text x="190" y="230" text-anchor="middle" fill="#1A1A1A" font-size="10.5" font-family="Inter,Helvetica,sans-serif">inspect &rarr; log / alert / (BPF-LSM) act</text>
-        </svg>
-      </div>
-    </div>
-    <div class="callout" style="margin-top:10px;">
-      <p>cgroups/pods and eBPF are <strong>orthogonal</strong>: resource isolation vs fine-grained
-         syscall/file policy. An agent may need both &mdash; a pod for blast-radius, a policy engine for
-         &ldquo;don&rsquo;t <code>find /</code> the shared filesystem.&rdquo;</p></div>
-  </div>
-  <div class="footnote">eBPF: <a href="https://ebpf.io/what-is-ebpf/">ebpf.io/what-is-ebpf</a> &middot; agent-focused eBPF observability: <a href="https://github.com/eunomia-bpf/agentsight">agentsight</a>.</div>
-  <aside class="notes">
-    BACKUP for the sysadmin/security crowd (Campana likely probes here). Diagram redrawn from ebpf.io's own
-    hook-point explanation: "eBPF programs are event-driven and run when the kernel or an application passes
-    a certain hook point. Pre-defined hooks include system calls, function entry/exit, kernel tracepoints,
-    network events; if none exists, attach a kprobe/uprobe almost anywhere." From Greg Thain (HTCondor):
-    eBPF was historically read-only; BPF-LSM now allows some mutation of kernel state/syscall results
-    (already replaced k8s networking-proxy sidecars with in-kernel control). Lincoln Bryant: cgroups =
-    resource isolation, eBPF = attach to kernel funcs/data. Greg's HTC'24 eBPF talk is the reference. Tools:
-    Tetragon, Falco, bpflock; sydbox (gitlab.exherbo.org/sydbox/sydbox); bubblewrap.
-    NEW: agentsight (eunomia-bpf) is a perf/top/strace-like tool FOR AI AGENTS specifically — eBPF probes
-    watch an agent's process tree, file ops, network destinations, and (via TLS tracing at the syscall
-    boundary) even the plaintext LLM request/response, all without modifying the agent. That's the connective
-    tissue between "eBPF as a concept" and "eBPF as how you'd actually observe what an agent did on this
-    facility" — a real answer to "can you audit what the agent touched?" research.md §sandboxing has more.
   </aside>
 </section>
 
@@ -685,6 +468,169 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
     docs_sources.json) is the controlled alternative to open web access. research.md §skills-governance.
     NEW, opinionated, very current slide — plays well with the technical/security crowd.
   </aside>
+</section>
+</section>
+
+<section id="theme-trust">
+  <div class="theme-lead">
+    <p class="theme-num">Part 3 of 3 &middot; AI acting <em>through</em> the facility</p>
+    <h2 style="border-bottom:none; padding-bottom:0;">The physicist&rsquo;s view: <span class="accent">laptop &rarr; facility</span></h2>
+    <p class="theme-thesis">The physicist of the near future hardly leaves the coding environment on their
+       laptop. The facility&rsquo;s job is a <strong>safe port to plug an agent into</strong> &mdash; who it is,
+       what it may touch, and how every call is audited.</p>
+    <p class="theme-covers">The MCP broker &middot; pipelines from the laptop &middot; identity.</p>
+  </div>
+  <aside class="notes">Thesis to say: the physicist stays in their own coding environment; the facility's
+    job is to be safely pluggable. One connector, like USB-C: the same socket regardless of which agent
+    or model is on the other end. Covers the broker, intent-level pipelines, and identity.</aside>
+</section>
+
+<section id="agenda-gateway">
+  <p class="kicker">The physicist&rsquo;s view &middot; the USB-C port of the facility</p>
+  <h2>A credential-brokered <span class="accent">MCP gateway</span></h2>
+  <div class="content">
+    <p style="margin-bottom:2px;">One standard socket in front of the facility&rsquo;s services. The LLM client
+       <strong>never holds raw credentials</strong>; the broker authenticates the user, mints short-lived
+       per-service credentials, and audits every tool call.</p>
+    <div style="text-align:center; margin:6px 0 4px;">
+      <img src="images/NEW-af-mcp-arch.svg" alt="Claude, Gemini or any MCP client to the mcp.af.uchicago.edu front door (oauth2-proxy, AF Keycloak OIDC), through a FastMCP aggregator and AF credential broker (FastAPI /v1) doing identity, authZ, credential brokering and audit, fanning out to rucio-mcp, ami-mcp, openmagic, panda-mcp, condor-mcp, gitlab-mcp, jupyter-control and an Nth backend with no code change" style="max-width:100%; max-height:315px;">
+    </div>
+    <div class="callout teal" style="margin-top:4px;">
+      <p style="font-size:13.5pt;">The <strong>strategic boundary</strong>: identity, authZ, credential brokering, and audit in one
+         place &mdash; the same boundary a site needs regardless of AI. Live at
+         <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s <strong>af-mcp-platform</strong>.</p></div>
+  </div>
+  <div class="footnote"><a href="https://github.com/maniaclab/af-mcp-platform">af-mcp-platform</a> &middot; <a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/atlas-outreach-data-tools/atlasopenmagic-mcp">atlasopenmagic</a> &middot; <a href="https://panda-wms.readthedocs.io/en/latest/advanced/mcp.html">panda-mcp</a> &middot; <a href="https://indico.cern.ch/event/1471803/contributions/6967102/">condor-mcp</a> (Bockelman, CHEP&nbsp;2026).</div>
+  <aside class="notes">
+    THE highlighted named artifact of the talk: Giordon's af-mcp-platform (github.com/maniaclab/af-mcp-platform),
+    the new way to interface with the AF. Say the USB-C line out loud: one standard socket, any device on
+    the other end; the facility standardizes the port, not the laptop. Real numbers: ~800 users,
+    single endpoint mcp.af.uchicago.edu, brokers to Rucio/PanDA/AMI/GitLab/Jupyter/HTCondor.
+    DEEP-DIVE backup = the topology slide (next, down-arrow).
+    Diagram is images/NEW-af-mcp-arch.svg: client (bearer token only) -> mcp.af.uchicago.edu
+    (oauth2-proxy -> AF Keycloak OIDC) -> FastMCP aggregator + AF credential broker (FastAPI /v1;
+    Identity / AuthZ / Credential brokering / Audit) -> rucio-mcp, ami-mcp, openmagic (theory/MC gen),
+    panda-mcp, condor-mcp, gitlab-mcp, jupyter-control, Nth backend (no code change).
+    Say out loud: the broker is the ONLY thing that ever touches raw x509/IAM; the client just
+    carries a short-lived bearer token. Deployed via Flux CD/Helm; portal at
+    portal.af.uchicago.edu/tokens issues the bearer tokens. ~800 users behind the one endpoint.
+  </aside>
+</section>
+
+<section>
+<section id="arch-intent">
+  <p class="kicker">The physicist&rsquo;s view &middot; pipelines from the laptop</p>
+  <h2>The agent speaks <span class="accent">intent</span>, the facility wires the backend</h2>
+  <div class="content">
+    <p style="margin-bottom:4px;">A whole pipeline driven from the
+       physicist&rsquo;s own coding environment, through the broker, to one facility or several:</p>
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:6px 0;">
+      <p class="node fill" style="font-size:14pt;">data_tool<span class="sub">&ldquo;get this dataset + metadata&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">transform_tool<span class="sub">&ldquo;turn inputs into histograms&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">batch_tool<span class="sub">&ldquo;run across the cluster&rdquo;</span></p>
+      <p class="node fill" style="font-size:14pt;">inference_tool<span class="sub">&ldquo;fit and get a limit&rdquo;</span></p>
+    </div>
+    <p class="text-center text-maroon" style="font-size:20pt; margin:2px;"><i class="fa-solid fa-arrows-down-to-line"></i></p>
+    <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin-top:6px;">
+      <div class="card teal"><p style="font-size:12.5pt;">Rucio &middot; dCache &middot; Open Data</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">coffea &middot; uproot &middot; ServiceX</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">HTCondor &middot; Slurm &middot; Dask &middot; REANA</p></div>
+      <div class="card teal"><p style="font-size:12.5pt;">pyhf &middot; cabinetry &middot; RooFit &middot; SBI</p></div>
+    </div>
+    <p class="text-muted" style="font-size:12pt; margin-top:10px;"><code>inference_tool</code> privileges no single fitter: <strong>HS3</strong> (HEP Statistics Serialization Standard) + <code>pyhs3</code> are the bridge between pyhf and RooFit.</p>
+    <div class="callout" style="margin-top:12px;">
+      <p>The agent never names &ldquo;coffea&rdquo; or &ldquo;condor.&rdquo; That indirection is exactly what lets the
+         <strong>same agent move between facilities and experiments</strong>.</p></div>
+  </div>
+  <aside class="notes">
+    The laptop-first story: the physicist never opens a facility UI; the agent calls intent-level
+    tools and the facility's playbook maps them to the local backends. Because the mapping is
+    facility-side, the same laptop plugs into a second facility by adding a second broker endpoint —
+    say that sentence out loud, it's the multi-facility punchline. The HS3/pyhs3 line pre-empts the
+    stats-interop question: the inference abstraction does not privilege one fitter.
+    Down-arrow: the "no context — stay quiet" honesty beat (Lustre-vs-Ceph) if the room wants it.
+  </aside>
+</section>
+
+<section id="arch-quiet">
+  <p class="kicker">Core insight &middot; flip side</p>
+  <h2>No context? It should <span class="accent">stay quiet</span></h2>
+  <div class="content">
+    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What actually happened</p>
+      <p>Our cluster agents confidently recommended <strong>Lustre</strong> tuning for a filesystem that is
+         actually <strong>Ceph</strong>. Zero Ceph context. Plausible, fluent, and wrong.</p></div>
+    <div class="callout teal" style="margin-top:14px;">
+      <p>The rule we adopted: <strong>ungrounded &rarr; silent</strong>. Context isn&rsquo;t only what makes an
+         agent useful; it&rsquo;s what makes it <em>safe to trust</em>. This is why "who keeps the context true"
+         is a real infrastructure question, not bookkeeping.</p></div>
+  </div>
+  <aside class="notes">Keep — it's the honesty beat and it sets up the trust/maintenance open questions. Real quotes
+  from Judith/Farnaz can stay or be paraphrased.</aside>
+</section>
+</section>
+
+<section>
+<section id="agenda-identity">
+  <p class="kicker">The physicist&rsquo;s view &middot; identity is the bottleneck</p>
+  <h2>Who is this <span class="accent">client</span>, and may it act as you?</h2>
+  <div class="content">
+    <p>Every MCP client &mdash; Claude, an internal tool, something a student wrote &mdash; wants to connect.
+       Once agents are the ones connecting, this stops being a one-time setup step and becomes a
+       <strong>continuous, scalable decision</strong>:</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; margin:16px 0;">
+      <div class="node fill" style="font-size:14pt;">Who is it?<span class="sub">a durable identity, not just a name</span></div>
+      <div class="node fill" style="font-size:14pt;">Do we trust it?<span class="sub">policy, not vibes</span></div>
+      <div class="node fill" style="font-size:14pt;">How much authority?<span class="sub">scoped, auditable</span></div>
+    </div>
+    <div class="callout teal">
+      <p><strong>Identity is becoming the bottleneck</strong>, not an afterthought &mdash; and WLCG&rsquo;s
+         x509&rarr;OIDC transition is the backdrop. Today, most clients register the way <a href="https://www.rfc-editor.org/rfc/rfc7591">DCR</a>
+         prescribes &mdash; the adopted, stateful mechanism. A newer <strong>draft</strong> spec,
+         <a href="https://www.ietf.org/archive/id/draft-parecki-oauth-client-id-metadata-document-02.html">CIMD</a>,
+         proposes something stateless instead (a client&rsquo;s identity as a URL the server fetches) &mdash; worth
+         watching, not yet the default. This sits <em>on top of</em> the community&rsquo;s federated-identity work
+         &mdash; WLCG token profiles, the <a href="https://aarc-community.org/">AARC</a> blueprint, IAM &mdash;
+         not instead of it.</p></div>
+  </div>
+  <aside class="notes">
+    SIMPLIFIED main line (moved DCR/CIMD jargon to the two backups) — for a mixed colloquium room, the
+    memorable takeaway is "identity becomes the bottleneck," not "DCR vs CIMD." Say the three questions
+    out loud as the research problem. IMPORTANT ACCURACY NOTE: don't imply CIMD is "the solution" — DCR is
+    what's actually adopted today (an approved RFC, what OIDC-based MCP clients follow in practice); CIMD is
+    still an IETF draft, not yet a real-world default, even though the MCP spec itself prefers it (SHOULD vs
+    MAY). Frame CIMD as "a newer proposal worth watching," not "the standard." AARC/WLCG line matters for
+    Groep/Campana in the room. This is a place to shape the standard, not just consume it — a facility/Tier-1
+    voice in how research infrastructure adopts client-identity models.
+    Full DCR-vs-CIMD mechanics + the real trace are the two backups (down-arrow) if pressed.
+  </aside>
+</section>
+
+<section id="agenda-identity-deepdive">
+  <!-- DEEP-DIVE / BACKUP : CIMD mechanics -->
+  <p class="kicker">Deep-dive &middot; CIMD vs DCR</p>
+  <h2>Client ID = a URL the server fetches</h2>
+  <div class="content">
+    <pre><code class="block">GET /authorize?client_id=https://app.example/oauth.json&amp;…
+        │  authn server fetches the JSON, validates, applies policy
+        ▼
+{ "client_id":"https://app.example/oauth.json",
+  "client_name":"…","redirect_uris":[…] }   ← hosted by the client</code></pre>
+    <ul style="font-size:13pt;">
+      <li><strong>Wins:</strong> no <code>/register</code> abuse surface; stable identity per app; domain-based allow/deny.</li>
+      <li><strong>Costs:</strong> server makes outbound fetches &rarr; <strong>SSRF</strong> risk (block private IPs, HTTPS-only, size/timeout caps); localhost ambiguity; domain &ne; trust.</li>
+    </ul>
+    <p class="text-muted" style="font-size:12pt; margin-top:8px;">Concretely in FastMCP: <code>CIMDTrustPolicy(trusted_domains=["claude.ai","cursor.com"], auto_approve_trusted=True)</code> &mdash; the facility decides which domains skip consent.</p>
+  </div>
+  <div class="footnote">Auth today reuses grid creds (x509) or Keycloak OIDC &mdash; <a href="https://github.com/kratsg/rucio-mcp/blob/main/docs/rucio-oauth-bridge.md">OAuth bridge docs</a>.</div>
+  <aside class="notes">BACKUP. The client_id IS the HTTPS URL to a metadata doc the client hosts; the authn server
+  fetches it on demand, validates client_id == source URL and the redirect_uris, then applies its own
+  policy. Read-only, stateless, fetch-on-demand. Spec status: adopted into MCP 2025-11-25 via SEP-991,
+  from an IETF draft promoted to WG status Oct 2025 (origins in IndieAuth; in production at Bluesky);
+  MCP Python SDK added minimal client-side support in v1.23.0, server-side still maturing. Stance:
+  CIMD = SHOULD, DCR = MAY, pre-registration still allowed. Software statements (RFC 7591 §2.3) / OS
+  attestation are the next layer if asked. The second backup (down-arrow) has a real trace, the actual
+  Claude client_id URLs, and the full spec list — pull that up only if someone like Groep or Campana
+  pushes on mechanics.</aside>
 </section>
 </section>
 
@@ -913,13 +859,12 @@ oidc_audience = rucio</code></pre>
       <div>
         <p>Swap the model and runtime freely. The <strong>facility context, identity, and trust</strong> are what
            make it useful and safe here — and they port to the next facility, the next experiment, the next science.</p>
-        <p class="text-muted" style="font-size:13pt; margin-top:10px;">A team effort at UChicago (the AF team and MANIAC Lab); informal collaboration with CMS, DUNE, and Belle&nbsp;II colleagues.</p>
-        <p class="text-teal" style="font-size:13.5pt; margin-top:8px;"><i class="fa-solid fa-arrow-right"></i> Now — let&rsquo;s discuss.</p>
+        <p class="text-muted" style="font-size:13pt; margin-top:10px;">A team effort at UChicago (the AF team and MANIAC Lab).</p>
       </div>
       <div class="callout teal">
         <p class="label">Pointers</p>
         <ul style="margin:2px 0;">
-          <li><a href="https://github.com/kratsg/af-mcp-platform">github.com/kratsg/af-mcp-platform</a></li>
+          <li><a href="https://github.com/maniaclab/af-mcp-platform">github.com/maniaclab/af-mcp-platform</a></li>
           <li><a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/usatlas/marketplace">usatlas/marketplace</a></li>
           <li><a href="https://usatlas.github.io/af-docs/ai">AF AI docs</a> &middot; <a href="https://github.com/EOSC-synergy/ssh-oidc">ssh-oidc</a> (EOSC-synergy) &middot; <a href="https://pixi.sh">pixi.sh</a></li>
         </ul>
@@ -939,8 +884,6 @@ oidc_audience = rucio</code></pre>
     things we can speak to honestly if asked — adjust before presenting.
   </aside>
 </section>
-
-
 
 </div>
 </div>
