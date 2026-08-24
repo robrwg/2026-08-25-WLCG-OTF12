@@ -226,6 +226,73 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 </section>
 
+<section id="proof-gateway">
+  <p class="kicker">Existence proof &middot; the other half: a user gateway, live</p>
+  <h2>&ldquo;One gateway. <span class="accent">Your entire facility.</span>&rdquo;</h2>
+  <div class="content">
+    <div style="display:grid; grid-template-columns:1.22fr 0.78fr; gap:18px; align-items:stretch;">
+      <div class="pdiag-panel">
+        <p class="pdiag-url">mcp-portal.af.uchicago.edu &middot; live</p>
+        <div class="pdiag" id="pdiag" aria-label="How AI assistants reach the facility: an AI assistant speaks MCP to the MCP Gateway (auth, policy, audit, broker), which fans out to Rucio, HTCondor, Jupyter and storage. An animated pulse replays two authorized tool calls and one denied at policy.">
+          <div class="d-node d-client" data-pnode="client">AI Assistant
+            <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span>
+          </div>
+          <div class="d-link" aria-hidden="true"><span class="d-linklabel">MCP</span></div>
+          <div class="d-node d-gateway" data-pnode="gateway">
+            <span class="d-gwname">MCP Gateway</span>
+            <div class="d-tags">
+              <span class="d-tag" data-gtag="auth">Auth <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></span>
+              <span class="d-tag" data-gtag="policy">Policy <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></span>
+              <span class="d-tag" data-gtag="audit">Audit <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></span>
+              <span class="d-tag" data-gtag="broker">Broker <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></span>
+            </div>
+          </div>
+          <div class="d-stem" aria-hidden="true"></div>
+          <div class="d-fanout">
+            <div class="d-branch" data-pnode="rucio">Rucio <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></div>
+            <div class="d-branch" data-pnode="htcondor">HTCondor <span class="d-icon" aria-hidden="true"><span class="d-spin"></span><svg class="d-check" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><svg class="d-x" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-width="3" stroke-linecap="round"/></svg></span></div>
+            <div class="d-branch">Jupyter <span class="d-icon" aria-hidden="true"><span class="d-spin"></span></span></div>
+            <div class="d-branch">Storage <span class="d-icon" aria-hidden="true"><span class="d-spin"></span></span></div>
+          </div>
+          <div class="d-pulse" data-pulse-dot aria-hidden="true"></div>
+          <div class="d-node d-cred" data-pnode="credential" aria-hidden="true"><span data-cred-label>x509</span></div>
+          <div class="d-chat" aria-hidden="true">
+            <div class="d-chatline" data-chat-line="0"><span class="d-chatrole">user</span><span class="d-chattext" data-chat-text></span></div>
+            <div class="d-chatline" data-chat-line="1"><span class="d-chatrole">ai</span><span class="d-chattext" data-chat-text></span></div>
+            <div class="d-chatline" data-chat-line="2"><span class="d-chatrole">ai</span><span class="d-chattext" data-chat-text></span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px; justify-content:center;">
+        <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-shield-halved"></i> Credentials stay behind the broker</h3>
+          <p style="font-size:11pt;">Short-lived credentials minted per call. Raw tokens and certificates <strong>never reach the AI assistant</strong>.</p></div>
+        <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-plug-circle-plus"></i> Add tools, not complexity</h3>
+          <p style="font-size:11pt;">One endpoint for datasets, jobs, notebooks, storage. Backends added by configuration.</p></div>
+        <div class="card teal"><h3 style="font-size:13pt;"><i class="fa-solid fa-list-check"></i> Authorize every call</h3>
+          <p style="font-size:11pt;">Group-based access controls and audit logging govern <strong>every tool invocation</strong>.</p></div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:10px;">
+      <p style="font-size:13pt;">Not a demo: Rucio, AMI, HTCondor, JupyterLab and filesystem access are exposed to
+         AI-powered workflows today. <strong>How it works: part 03.</strong></p>
+    </div>
+  </div>
+  <div class="footnote"><a href="https://mcp-portal.af.uchicago.edu/">mcp-portal.af.uchicago.edu</a> &middot; live diagram reproduced from the portal&rsquo;s landing page (<a href="https://github.com/maniaclab/af-mcp-platform">af-mcp-platform</a>).</div>
+  <aside class="notes">
+    The second thing the 01 divider promised: the user gateway, shown as the live product, 30-45 seconds
+    only. The diagram is the portal landing page's own animation, reproduced faithfully in the slide
+    (ported from af-mcp-platform portal/src/lib/gatewayPulse.ts): three scripted cycles on loop. Let it
+    run one cycle while talking; when the third cycle plays, point at it: "Delete my /data datasets"
+    gets a green Auth check, then Policy fails, the gateway buzzes red, and the assistant comes back
+    with "I am not authorized". That's the whole governance story in eight seconds. The three messages
+    on the right are the portal's own: credentials stay behind the broker, add tools not complexity,
+    authorize every call. Do NOT explain the architecture here; say "hold that thought, part 03 opens
+    it up" (the broker diagram and the one-command connect slide live there). If asked now: single
+    endpoint, ~800 AF users behind it. Fallbacks: with no network or reduced motion, the static
+    diagram stands on its own (that's how the portal itself degrades too).
+  </aside>
+</section>
+
 <section id="theme-ops" class="section-divider" data-state="is-section-divider">
   <p class="section-num">02</p>
   <p class="kicker">AI acting <em>on</em> the facility</p>
@@ -935,6 +1002,9 @@ oidc_audience = rucio</code></pre>
 
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
+<!-- GSAP: only used by the proof-gateway slide's portal-diagram animation below.
+     If it fails to load, the slide degrades to the complete static diagram. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
 Reveal.initialize({
   width: 1280,
@@ -948,6 +1018,221 @@ Reveal.initialize({
   center: false,
   plugins: [ RevealNotes ]
 });
+</script>
+<script>
+/* The proof-gateway slide's "gateway pulse" — a faithful vanilla-JS port of the
+   mcp-portal.af.uchicago.edu landing page's one motion moment (af-mcp-platform:
+   portal/src/lib/gatewayPulse.ts). Three scripted cycles on loop: two authorized
+   tool calls (Rucio, HTCondor) and one denied at Policy. Plays only while the
+   slide is on screen (Reveal events stand in for the portal's ScrollTrigger);
+   skipped under prefers-reduced-motion or if GSAP failed to load — the static
+   diagram is complete without it, exactly as on the portal. */
+(function () {
+  if (typeof gsap === 'undefined') return;
+  if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  var root = document.getElementById('pdiag');
+  if (!root) return;
+
+  var CYCLES = [
+    { user: 'find me a dataset', call: 'tool_call(rucio_list_dsids)', result: 'Found 3 datasets...',
+      tags: { auth: 'ok', policy: 'ok', audit: 'ok' }, cred: 'x509', target: 'rucio' },
+    { user: 'launch a batch job', call: 'tool_call(condor_submit_job)', result: 'Launched job 293813.0',
+      tags: { auth: 'ok', policy: 'ok', audit: 'ok' }, cred: 'condor-token', target: 'htcondor' },
+    { user: 'Delete my /data datasets', call: 'tool_call(fs_delete_dir)', result: 'I am not authorized...',
+      tags: { auth: 'ok', policy: 'fail', audit: 'fail' }, cred: null, target: null }
+  ];
+
+  var T = { chatReveal: 0.3, chatHoldShort: 0.55, chatHoldFinal: 1.9, chatCollapse: 0.4,
+    thinkHold: 0.8, clearOffset: 0.12, dotFade: 0.15, travelShort: 0.3, travelMed: 0.4,
+    travelLong: 0.55, settleGap: 0.1, tagCheck: 0.22, tagResolveHold: 0.18, deniedGap: 0.55,
+    brokerCheckDelay: 0.15, credentialAppear: 0.2, credHold: 0.35, credentialVanish: 0.3,
+    targetCheckHold: 0.3, arrivalHold: 0.45 };
+
+  function q(sel) { return root.querySelector(sel); }
+  var refs = {
+    client: q('[data-pnode="client"]'), gateway: q('[data-pnode="gateway"]'),
+    fanout: q('.d-fanout'), credential: q('[data-pnode="credential"]'),
+    credLabel: q('[data-cred-label]'), dot: q('[data-pulse-dot]'),
+    tags: { auth: q('[data-gtag="auth"]'), policy: q('[data-gtag="policy"]'),
+      audit: q('[data-gtag="audit"]'), broker: q('[data-gtag="broker"]') },
+    leaves: { rucio: q('[data-pnode="rucio"]'), htcondor: q('[data-pnode="htcondor"]') },
+    chat: Array.prototype.map.call(root.querySelectorAll('[data-chat-line]'), function (w) {
+      return { wrap: w, text: w.querySelector('[data-chat-text]') };
+    })
+  };
+
+  /* Reveal scales the whole deck with a CSS transform, so rect deltas (screen px)
+     must be divided by Reveal.getScale() before use as GSAP x/y (local px). All
+     positions are read fresh at tween start, so window resizes between loops are
+     picked up automatically — same trick as the portal's original. */
+  function scale() { return (window.Reveal && Reveal.getScale && Reveal.getScale()) || 1; }
+  function rect() { return root.getBoundingClientRect(); }
+  function cx(el, c) { var r = el.getBoundingClientRect(); return (r.left + r.width / 2 - c.left) / scale(); }
+  function cy(el, c) { var r = el.getBoundingClientRect(); return (r.top + r.height / 2 - c.top) / scale(); }
+  function ty(el, c) { return (el.getBoundingClientRect().top - c.top) / scale(); }
+  function by(el, c) { return (el.getBoundingClientRect().bottom - c.top) / scale(); }
+  function lx(el, c) { return (el.getBoundingClientRect().left - c.left) / scale(); }
+  function rx(el, c) { return (el.getBoundingClientRect().right - c.left) / scale(); }
+  function setState(el, s) { if (s) { el.dataset.state = s; } else { delete el.dataset.state; } }
+
+  function Seq(tl) { this.tl = tl; this.t = 0; }
+  Seq.prototype.mark = function (fn) { this.tl.call(fn, null, this.t); return this; };
+  Seq.prototype.markAt = function (fn, off) { this.tl.call(fn, null, this.t + off); return this; };
+  Seq.prototype.wait = function (d) { this.t += d; return this; };
+  Seq.prototype.tween = function (tg, vars, d) { vars.duration = d; this.tl.to(tg, vars, this.t); this.t += d; return this; };
+  Seq.prototype.tweenC = function (tg, vars, d) { vars.duration = d; this.tl.to(tg, vars, this.t); return this; };
+  Seq.prototype.moveTo = function (el, vars, d) { vars.ease = 'power1.inOut'; return this.tween(el, vars, d); };
+  Seq.prototype.appear = function (el, x, y) { this.mark(function () { gsap.set(el, { x: x, y: y }); }); return this.tween(el, { opacity: 1 }, T.dotFade); };
+  Seq.prototype.vanish = function (el) { return this.tween(el, { opacity: 0 }, T.dotFade); };
+  Seq.prototype.checkTag = function (el, outcome) {
+    return this.mark(function () { setState(el, 'checking'); }).wait(T.tagCheck)
+      .mark(function () { setState(el, outcome); }).wait(T.tagResolveHold);
+  };
+
+  function buildCycle(cycle) {
+    var tl = gsap.timeline();
+    var seq = new Seq(tl);
+    var client = refs.client, gateway = refs.gateway, fanout = refs.fanout,
+      credential = refs.credential, credLabel = refs.credLabel, dot = refs.dot,
+      tags = refs.tags, chat = refs.chat;
+
+    function reveal(i, text) {
+      seq.mark(function () { chat[i].text.textContent = text; });
+      seq.tween(chat[i].wrap, { height: 'auto', opacity: 1, ease: 'power2.out' }, T.chatReveal);
+    }
+
+    reveal(0, cycle.user);
+    seq.wait(T.chatHoldShort);
+
+    seq.appear(dot, function () { return lx(chat[0].wrap, rect()); }, function () { return cy(chat[0].wrap, rect()); });
+    seq.moveTo(dot, { x: function () { return cx(client, rect()); }, y: function () { return cy(client, rect()); } }, T.travelMed);
+    seq.mark(function () { client.classList.add('is-pulse-active'); setState(client, 'checking'); });
+    seq.vanish(dot);
+    seq.wait(T.thinkHold);
+
+    reveal(1, cycle.call);
+    seq.wait(T.chatHoldShort);
+
+    seq.appear(dot, function () { return cx(client, rect()); }, function () { return by(client, rect()); });
+    seq.mark(function () { client.classList.remove('is-pulse-active'); });
+    seq.moveTo(dot, { y: function () { return ty(gateway, rect()); } }, T.travelLong);
+    seq.mark(function () { gateway.classList.add('is-pulse-active'); });
+    seq.vanish(dot);
+    seq.wait(T.settleGap);
+
+    var denied = false;
+    ['auth', 'policy', 'audit'].forEach(function (k) {
+      var outcome = cycle.tags[k];
+      seq.checkTag(tags[k], outcome);
+      if (outcome === 'fail') denied = true;
+    });
+
+    if (denied) {
+      seq.mark(function () { gateway.classList.remove('is-pulse-active'); gateway.classList.add('is-pulse-denied'); });
+      seq.wait(T.deniedGap);
+      seq.appear(dot, function () { return cx(gateway, rect()); }, function () { return ty(gateway, rect()); });
+      seq.mark(function () { gateway.classList.remove('is-pulse-denied'); });
+      seq.moveTo(dot, { y: function () { return cy(client, rect()); } }, T.travelLong);
+    } else {
+      seq.mark(function () { setState(tags.broker, 'checking'); });
+      seq.wait(T.brokerCheckDelay);
+      seq.mark(function () {
+        credLabel.textContent = cycle.cred || '';
+        var gw = gateway.getBoundingClientRect(), r = rect(), s = scale();
+        gsap.set(credential, {
+          x: (gw.right - r.left) / s + 16,
+          y: (gw.top - r.top) / s + (gw.height / s) / 2 - credential.offsetHeight / 2
+        });
+      });
+      seq.tween(credential, { opacity: 1 }, T.credentialAppear);
+
+      seq.appear(dot, function () { return rx(gateway, rect()); }, function () { return cy(gateway, rect()); });
+      seq.moveTo(dot, { x: function () { return cx(credential, rect()); }, y: function () { return cy(credential, rect()); } }, T.travelMed);
+      seq.mark(function () { credential.classList.add('is-pulse-active'); });
+      seq.vanish(dot);
+      seq.wait(T.credHold);
+
+      seq.appear(dot, function () { return cx(credential, rect()); }, function () { return cy(credential, rect()); });
+      seq.mark(function () { credential.classList.remove('is-pulse-active'); });
+      seq.moveTo(dot, { x: function () { return rx(gateway, rect()); }, y: function () { return cy(gateway, rect()); } }, T.travelMed);
+      seq.mark(function () { setState(tags.broker, 'ok'); });
+      seq.tweenC(dot, { opacity: 0 }, T.dotFade);
+      seq.tween(credential, { opacity: 0 }, T.credentialVanish);
+
+      var target = cycle.target ? refs.leaves[cycle.target] : null;
+      if (target) {
+        seq.appear(dot, function () { return cx(gateway, rect()); }, function () { return by(gateway, rect()); });
+        seq.mark(function () { gateway.classList.remove('is-pulse-active'); });
+        seq.moveTo(dot, { y: function () { return ty(fanout, rect()); } }, T.travelShort);
+        seq.moveTo(dot, { x: function () { return cx(target, rect()); } }, T.travelMed);
+        seq.moveTo(dot, { y: function () { return ty(target, rect()); } }, T.travelShort);
+        seq.mark(function () { target.classList.add('is-pulse-active'); setState(target, 'checking'); });
+        seq.vanish(dot);
+        seq.wait(T.targetCheckHold);
+        seq.mark(function () { setState(target, 'ok'); });
+        seq.wait(T.arrivalHold);
+
+        seq.appear(dot, function () { return cx(target, rect()); }, function () { return ty(target, rect()); });
+        seq.mark(function () { target.classList.remove('is-pulse-active'); });
+        seq.moveTo(dot, { y: function () { return ty(fanout, rect()); } }, T.travelShort);
+        seq.moveTo(dot, { x: function () { return cx(gateway, rect()); } }, T.travelMed);
+        seq.moveTo(dot, { y: function () { return by(gateway, rect()); } }, T.travelShort);
+        seq.moveTo(dot, { y: function () { return cy(client, rect()); } }, T.travelLong);
+      }
+    }
+
+    seq.markAt(function () { setState(client, ''); client.classList.remove('is-pulse-active'); }, T.clearOffset);
+    seq.moveTo(dot, {
+      x: function () { return lx(chat[2].wrap, rect()); },
+      y: function () { return cy(chat[2].wrap, rect()); }
+    }, T.travelMed);
+    seq.vanish(dot);
+    seq.wait(T.settleGap);
+
+    reveal(2, cycle.result);
+    seq.wait(T.chatHoldFinal);
+
+    seq.mark(function () { client.classList.remove('is-pulse-active'); });
+    seq.tween(chat.map(function (l) { return l.wrap; }), { height: 0, opacity: 0, ease: 'power2.in' }, T.chatCollapse);
+    seq.mark(function () {
+      setState(tags.auth, ''); setState(tags.policy, ''); setState(tags.audit, ''); setState(tags.broker, '');
+      if (cycle.target) setState(refs.leaves[cycle.target], '');
+    });
+    return tl;
+  }
+
+  function resetAll() {
+    ['auth', 'policy', 'audit', 'broker'].forEach(function (k) { setState(refs.tags[k], ''); });
+    ['rucio', 'htcondor'].forEach(function (k) {
+      setState(refs.leaves[k], '');
+      refs.leaves[k].classList.remove('is-pulse-active');
+    });
+    setState(refs.client, '');
+    refs.client.classList.remove('is-pulse-active');
+    refs.gateway.classList.remove('is-pulse-active', 'is-pulse-denied');
+    refs.credential.classList.remove('is-pulse-active');
+    gsap.set(refs.dot, { opacity: 0 });
+    gsap.set(refs.credential, { opacity: 0 });
+    refs.chat.forEach(function (l) { gsap.set(l.wrap, { height: 0, opacity: 0 }); });
+  }
+
+  var master = gsap.timeline({ repeat: -1, repeatDelay: 1.3, paused: true });
+  CYCLES.forEach(function (c) { master.add(buildCycle(c)); });
+
+  function sync() {
+    var cur = Reveal.getCurrentSlide && Reveal.getCurrentSlide();
+    if (cur && cur.contains(root)) {
+      master.play();
+    } else if (master.progress() > 0 || master.isActive()) {
+      /* Rewind, not just pause: .call() side effects (classes, tag states,
+         chat text) outlive a plain pause, so clear them for a clean re-entry. */
+      master.pause(0);
+      resetAll();
+    }
+  }
+  Reveal.on('ready', sync);
+  Reveal.on('slidechanged', sync);
+})();
 </script>
 </body>
 </html>
