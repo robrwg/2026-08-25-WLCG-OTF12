@@ -415,6 +415,7 @@ Priority: fix /scratch perms c111+c113, then release user-02
   </aside>
 </section>
 
+<section>
 <section id="govern-memory">
   <p class="kicker">The sysadmin&rsquo;s view &middot; watching the watcher</p>
   <h2>Memory: how admins <span class="accent">see what the agent knows</span></h2>
@@ -452,7 +453,29 @@ Priority: fix /scratch perms c111+c113, then release user-02
     And the trust escalation log is the single most quotable governance idea we have: autonomy changes are
     themselves version-controlled — you can point to the commit where you stopped watching, who approved
     it, and on what evidence.
+    Down-arrow: the "no context — stay quiet" honesty beat (Lustre-vs-Ceph) if the room wants it.
   </aside>
+</section>
+
+<section id="arch-quiet">
+  <!-- DEEP-DIVE : the honesty beat — what an ungrounded agent does on a real cluster -->
+  <p class="kicker">Deep-dive &middot; the flip side of context</p>
+  <h2>No context? It should <span class="accent">stay quiet</span></h2>
+  <div class="content">
+    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What actually happened</p>
+      <p>Our cluster agents confidently recommended <strong>Lustre</strong> tuning for a filesystem that is
+         actually <strong>Ceph</strong>. Zero Ceph context. Plausible, fluent, and wrong.</p></div>
+    <div class="callout teal" style="margin-top:14px;">
+      <p>The rule we adopted: <strong>ungrounded &rarr; silent</strong>. Context isn&rsquo;t only what makes an
+         agent useful; it&rsquo;s what makes it <em>safe to trust</em>. This is why "who keeps the context true"
+         is a real infrastructure question, not bookkeeping.</p></div>
+  </div>
+  <aside class="notes">Backup under the memory slide, for when the room asks "what happens when the context
+  is wrong?" A real incident from our own cluster agents, and exactly why "who keeps the context true" (the
+  memory lifecycle one slide up) is an operations question, not bookkeeping. It's the honesty beat and it
+  plants the seed for the trust/maintenance research questions at the end. Real quotes from Judith/Farnaz
+  can stay or be paraphrased.</aside>
+</section>
 </section>
 
 <section>
@@ -619,7 +642,6 @@ Priority: fix /scratch perms c111+c113, then release user-02
   </aside>
 </section>
 
-<section>
 <section id="arch-intent">
   <p class="kicker">The physicist&rsquo;s view &middot; pipelines from the laptop</p>
   <h2>The agent speaks <span class="accent">intent</span>, the facility wires the backend</h2>
@@ -650,25 +672,7 @@ Priority: fix /scratch perms c111+c113, then release user-02
     facility-side, the same laptop plugs into a second facility by adding a second broker endpoint —
     say that sentence out loud, it's the multi-facility punchline. The HS3/pyhs3 line pre-empts the
     stats-interop question: the inference abstraction does not privilege one fitter.
-    Down-arrow: the "no context — stay quiet" honesty beat (Lustre-vs-Ceph) if the room wants it.
   </aside>
-</section>
-
-<section id="arch-quiet">
-  <p class="kicker">Core insight &middot; flip side</p>
-  <h2>No context? It should <span class="accent">stay quiet</span></h2>
-  <div class="content">
-    <div class="callout"><p class="label"><i class="fa-solid fa-triangle-exclamation"></i> What actually happened</p>
-      <p>Our cluster agents confidently recommended <strong>Lustre</strong> tuning for a filesystem that is
-         actually <strong>Ceph</strong>. Zero Ceph context. Plausible, fluent, and wrong.</p></div>
-    <div class="callout teal" style="margin-top:14px;">
-      <p>The rule we adopted: <strong>ungrounded &rarr; silent</strong>. Context isn&rsquo;t only what makes an
-         agent useful; it&rsquo;s what makes it <em>safe to trust</em>. This is why "who keeps the context true"
-         is a real infrastructure question, not bookkeeping.</p></div>
-  </div>
-  <aside class="notes">Keep — it's the honesty beat and it sets up the trust/maintenance open questions. Real quotes
-  from Judith/Farnaz can stay or be paraphrased.</aside>
-</section>
 </section>
 
 <section>
