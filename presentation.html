@@ -32,7 +32,8 @@
       <p class="kicker">WLCG Open Technical Forum #12 &middot; 2026&#8209;08&#8209;25</p>
       <h1>AI and Facilities</h1>
       <p class="subtitle">Towards trustworthy adoption of agentic management and use</p>
-      <p class="byline">Rob&nbsp;Gardner, Giordon&nbsp;Stark, Ilija&nbsp;Vukotic, Fengping&nbsp;Hu &middot; University&nbsp;of&nbsp;Chicago</p>
+      <p class="byline">Rob&nbsp;Gardner, <strong>Giordon&nbsp;Stark</strong>, <strong>Ilija&nbsp;Vukotic</strong>, Fengping&nbsp;Hu &middot; University&nbsp;of&nbsp;Chicago</p>
+      <p class="byline" style="font-size:12pt; margin-top:8px;"><i class="fa-solid fa-star" style="color:var(--teal);"></i> With special acknowledgement to <strong>Giordon Stark</strong>, original author of most of these slides.</p>
     </div>
     <div style="text-align:center;">
       <!-- NEW-title-blueprint.png: sysadmin + physicist both plug into the WLCG AF/site via the MCP broker, maroon blueprint style -->
@@ -225,19 +226,15 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 </section>
 
-<section id="theme-ops">
-  <div class="theme-lead">
-    <p class="theme-num">Part 2 of 3 &middot; AI acting <em>on</em> the facility</p>
-    <h2 style="border-bottom:none; padding-bottom:0;">The sysadmin&rsquo;s view: earning trust for <span class="accent">privileged actions</span></h2>
-    <p class="theme-thesis">The actions that matter are the ones an admin does with privileges. An agent gets
-       them only the way a new human operator would: <strong>incrementally, observed, and revocable</strong> &mdash;
-       and the admins must always be able to see <strong>what it did and what it has learned</strong>.</p>
-    <p class="theme-covers">The trust ladder &middot; governance in git &middot; three levels &middot; memory &middot; enforcement.</p>
-  </div>
+<section id="theme-ops" class="section-divider" data-state="is-section-divider">
+  <p class="section-num">02</p>
+  <p class="kicker">AI acting <em>on</em> the facility</p>
+  <h1>The sysadmin&rsquo;s view:<br>earning trust for privileged actions</h1>
+  <p class="subtitle" style="margin-top:14px;">Monitoring &middot; privileged operations &middot; trust principles &mdash; earned like a new operator: incrementally, observed, revocable.</p>
   <aside class="notes">Thesis to say: this is the part of the talk for everyone who runs a site. Nothing
     here grants trust up front; autonomy is earned action-type by action-type, recorded in reviewable
-    artifacts, and revocable. The next five slides are the mechanics: ladder, git governance, levels,
-    memory, enforcement.</aside>
+    artifacts, and revocable — and the admins can always see what the agent did and what it has learned.
+    The next five slides are the mechanics: ladder, git governance, levels, memory, enforcement.</aside>
 </section>
 
 <section id="agenda-trust-ladder">
@@ -471,18 +468,15 @@ Priority: fix /scratch perms c111+c113, then release user-02
 </section>
 </section>
 
-<section id="theme-trust">
-  <div class="theme-lead">
-    <p class="theme-num">Part 3 of 3 &middot; AI acting <em>through</em> the facility</p>
-    <h2 style="border-bottom:none; padding-bottom:0;">The physicist&rsquo;s view: <span class="accent">laptop &rarr; facility</span></h2>
-    <p class="theme-thesis">The physicist of the near future hardly leaves the coding environment on their
-       laptop. The facility&rsquo;s job is a <strong>safe port to plug an agent into</strong> &mdash; who it is,
-       what it may touch, and how every call is audited.</p>
-    <p class="theme-covers">The MCP broker &middot; pipelines from the laptop &middot; identity.</p>
-  </div>
+<section id="theme-trust" class="section-divider" data-state="is-section-divider">
+  <p class="section-num">03</p>
+  <p class="kicker">AI acting <em>through</em> the facility</p>
+  <h1>The physicist&rsquo;s view:<br>laptop &rarr; facility</h1>
+  <p class="subtitle" style="margin-top:14px;">The physicist hardly leaves their laptop; the facility&rsquo;s job is a safe port to plug an agent into &mdash; the broker &middot; self-service access &middot; pipelines &middot; identity.</p>
   <aside class="notes">Thesis to say: the physicist stays in their own coding environment; the facility's
     job is to be safely pluggable. One connector, like USB-C: the same socket regardless of which agent
-    or model is on the other end. Covers the broker, intent-level pipelines, and identity.</aside>
+    or model is on the other end. Covers the broker, the self-service portal, intent-level pipelines,
+    and identity.</aside>
 </section>
 
 <section id="agenda-gateway">
@@ -506,14 +500,55 @@ Priority: fix /scratch perms c111+c113, then release user-02
     the new way to interface with the AF. Say the USB-C line out loud: one standard socket, any device on
     the other end; the facility standardizes the port, not the laptop. Real numbers: ~800 users,
     single endpoint mcp.af.uchicago.edu, brokers to Rucio/PanDA/AMI/GitLab/Jupyter/HTCondor.
-    DEEP-DIVE backup = the topology slide (next, down-arrow).
+    Next slide: how a physicist actually connects — the self-service portal.
     Diagram is images/NEW-af-mcp-arch.svg: client (bearer token only) -> mcp.af.uchicago.edu
     (oauth2-proxy -> AF Keycloak OIDC) -> FastMCP aggregator + AF credential broker (FastAPI /v1;
     Identity / AuthZ / Credential brokering / Audit) -> rucio-mcp, ami-mcp, openmagic (theory/MC gen),
     panda-mcp, condor-mcp, gitlab-mcp, jupyter-control, Nth backend (no code change).
     Say out loud: the broker is the ONLY thing that ever touches raw x509/IAM; the client just
-    carries a short-lived bearer token. Deployed via Flux CD/Helm; portal at
-    portal.af.uchicago.edu/tokens issues the bearer tokens. ~800 users behind the one endpoint.
+    carries a short-lived bearer token. Deployed via Flux CD/Helm; the portal at
+    mcp-portal.af.uchicago.edu issues bearer tokens. ~800 users behind the one endpoint.
+  </aside>
+</section>
+
+<section id="agenda-portal">
+  <p class="kicker">The physicist&rsquo;s view &middot; self-service, today</p>
+  <h2>Getting connected takes <span class="accent">one command</span></h2>
+  <div class="content">
+    <div style="display:grid; grid-template-columns: 1.05fr 0.95fr; gap:24px; align-items:start;">
+      <div>
+        <p style="margin-bottom:8px;">Any MCP-capable client, one endpoint:</p>
+        <pre style="margin:0 0 10px;"><code class="block" style="font-size:11pt;">claude mcp add --transport http atlas-af \
+  https://mcp.af.uchicago.edu/mcp</code></pre>
+        <ul style="font-size:13pt;">
+          <li>First call returns a 401 &rarr; the client discovers the broker&rsquo;s OAuth endpoints &rarr; a <strong>browser login</strong> opens. No manual token handling.</li>
+          <li>Clients that can&rsquo;t do the OAuth flow mint a token at the <strong>self-service portal</strong> instead.</li>
+          <li><strong>Group-based access controls and audit logging</strong> govern every tool invocation.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card teal">
+          <h3 style="font-size:14.5pt;"><i class="fa-solid fa-id-badge"></i> mcp-portal.af.uchicago.edu</h3>
+          <p style="font-size:12.5pt;">The physicist&rsquo;s front door: link a CERN/ATLAS identity, mint an on-demand
+             x509/VOMS proxy, generate or revoke client tokens, and <strong>see which backends your account can
+             reach</strong>.</p>
+        </div>
+        <div class="callout" style="margin-top:10px;">
+          <p style="font-size:12.5pt;">&ldquo;One gateway. Your entire facility.&rdquo; &mdash; datasets, jobs,
+             notebooks, storage &mdash; while <strong>credentials stay behind the broker</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footnote"><a href="https://mcp-portal.af.uchicago.edu/">mcp-portal.af.uchicago.edu</a> &middot; <a href="https://github.com/maniaclab/af-mcp-platform">github.com/maniaclab/af-mcp-platform</a>.</div>
+  <aside class="notes">
+    The "how do I actually use it" slide, built from the live portal (mcp-portal.af.uchicago.edu). The
+    one-command story is real: Claude Desktop and Claude Code both bootstrap via the broker's own OAuth
+    discovery — first request 401s, the client opens a browser login against the AF Keycloak, done. The
+    portal is for everything else: identity linking (CERN/ATLAS IAM via OIDC), on-demand x509/VOMS proxy
+    minting, static bearer tokens for clients that predate the MCP OAuth spec, and per-account backend
+    visibility. Operators manage policy and backends via config PRs, not a UI — governance stays in git,
+    which ties this back to Part 2. Say: "this is self-service for ~800 users today, not a wireframe."
   </aside>
 </section>
 
@@ -853,12 +888,14 @@ oidc_audience = rucio</code></pre>
 
 <section id="thanks">
   <p class="kicker">Thank you</p>
-  <h2>Generic LLM &rarr; <span class="accent">facility-aware</span> collaborator</h2>
+  <h2>Two trust problems, one <span class="accent">facility layer</span></h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap:28px;">
       <div>
-        <p>Swap the model and runtime freely. The <strong>facility context, identity, and trust</strong> are what
-           make it useful and safe here — and they port to the next facility, the next experiment, the next science.</p>
+        <p><strong>On</strong> the facility: agents earn privileged operations the way a new operator would &mdash;
+           runbooks in git, three governance levels, reviewable memory, dual enforcement.
+           <strong>Through</strong> it: the whole facility behind one credential-brokered gateway,
+           self-service for ~800 users, and the client never holds a secret.</p>
         <p class="text-muted" style="font-size:13pt; margin-top:10px;">A team effort at UChicago (the AF team and MANIAC Lab).</p>
       </div>
       <div class="callout teal">
@@ -872,16 +909,20 @@ oidc_audience = rucio</code></pre>
     </div>
     <p class="text-center text-maroon" style="font-size:16.5pt; font-weight:600; margin-top:18px;">We don&rsquo;t think every site should build its own AI platform.<br>The question for this forum: <span class="accent">which parts of this layer do we build together?</span></p>
     <div style="border-top:1px solid var(--line-color); margin-top:16px; padding-top:12px;">
-      <p style="margin:0; font-size:13.5pt;"><strong>In flight &amp; next:</strong>
-         <span class="text-muted">more brokered MCP backends &middot; the trust-ladder eval harness &middot; runbook-governed privileged agents in staging &middot; the skills commons</span></p>
+      <p style="margin:0; font-size:13.5pt;"><strong>Hear more &mdash; demos &amp; talks on this + MCPs for the AF, by Giordon Stark:</strong><br>
+         <span style="font-size:12.5pt;"><a href="https://indico.cern.ch/event/1714565/">AMG Weekly, Sep&nbsp;4</a> &middot;
+         <a href="https://indico.nikhef.nl/event/7873/">PyHEP.dev 2026</a> &middot;
+         <a href="https://indico.cern.ch/event/1698548/">IRIS-HEP retreat</a> &middot;
+         <a href="https://indico.global/event/18639/">CLARIPHY</a></span></p>
     </div>
   </div>
   <div class="footnote">Gardner &middot; Stark &middot; Vukotic &middot; Hu &middot; UChicago &middot; WLCG OTF #12 &middot; 2026&#8209;08&#8209;25.</div>
   <aside class="notes">
     Deliver the closing question slowly, then stop talking — it hands the microphone to the forum, which
     is the point of an OTF. Credit the wider team in speech: Judith Stephen (HTCondor), Aidan Rosberg,
-    Farnaz Golnaraghi, David Jordan, and the AF user community. The "in flight" strip should only list
-    things we can speak to honestly if asked — adjust before presenting.
+    Farnaz Golnaraghi, David Jordan, and the AF user community. Point at the strip: Giordon is demoing
+    and talking about this + MCPs for the AF at AMG Weekly (Sep 4), PyHEP.dev 2026, the IRIS-HEP
+    retreat, and CLARIPHY — send people there for the deep dives.
   </aside>
 </section>
 
