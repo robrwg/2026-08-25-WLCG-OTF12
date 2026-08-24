@@ -1041,6 +1041,7 @@ Reveal.initialize({
    diagram is complete without it, exactly as on the portal. */
 (function () {
   if (typeof gsap === 'undefined') return;
+  if (/[?&]export/.test(window.location.search)) return; /* decktape/PDF export: keep the static diagram */
   if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
   var root = document.getElementById('pdiag');
   if (!root) return;
