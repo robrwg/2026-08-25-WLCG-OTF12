@@ -27,7 +27,7 @@
 <div class="slides">
 
 <section id="title">
-  <div style="display:grid; grid-template-columns: 1.25fr 0.85fr; gap:40px; align-items:center; width:100%;">
+  <div style="display:grid; grid-template-columns: 1fr 1.1fr; gap:36px; align-items:center; width:100%;">
     <div>
       <p class="kicker">WLCG Open Technical Forum #12 &middot; 2026&#8209;08&#8209;25</p>
       <h1>AI and Facilities</h1>
@@ -35,8 +35,8 @@
       <p class="byline">Rob&nbsp;Gardner, Giordon&nbsp;Stark, Ilija&nbsp;Vukotic, Fengping&nbsp;Hu &middot; University&nbsp;of&nbsp;Chicago</p>
     </div>
     <div style="text-align:center;">
-      <!-- title-hero.png is de-ATLAS-branded, generic AI-for-research-computing art -->
-      <img src="images/title-hero.png" alt="Agentic intelligence for research computing" style="max-width:100%; max-height:540px; border-radius:12px; box-shadow:0 8px 28px rgba(92,0,0,0.20);">
+      <!-- NEW-title-blueprint.png: physicist's laptop -> MCP broker -> WLCG site, blueprint style -->
+      <img src="images/NEW-title-blueprint.png" alt="Blueprint diagram: a physics researcher's laptop with agentic analysis pipelines connects via a USB-C-like MCP broker to a WLCG site's compute, GPUs, and storage" style="max-width:100%; max-height:460px; border-radius:12px; box-shadow:0 8px 28px rgba(92,0,0,0.20);">
     </div>
   </div>
   <div class="footnote">Slides AI-assisted by Claude (Anthropic) &middot; title illustration AI-generated.</div>
@@ -54,13 +54,13 @@
 
 <section id="thesis">
   <p class="kicker">The argument in one slide</p>
-  <h2>The model is the <span class="accent">easy</span> part</h2>
+  <h2>Facility context and <span class="accent">trust</span> challenges</h2>
   <div class="content">
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; align-items:stretch;">
       <div class="card">
         <p class="card-icon"><i class="fa-solid fa-robot"></i></p>
         <h3>What everyone watches</h3>
-        <p>Which model is best this month. The harness. The demo that goes viral.
+        <p>Which model is best this month. The runtime. The demo that goes viral.
            This layer moves fast and <strong>is not ours to own</strong>.</p>
       </div>
       <div class="card teal">
@@ -97,7 +97,7 @@
 
 <section id="vocab">
   <p class="kicker">Grounding &middot; fast vocabulary</p>
-  <h2>Four words for the next 20 minutes</h2>
+  <h2>Assumed vocabulary in this talk</h2>
   <div class="content">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
       <div class="card"><p class="card-icon"><i class="fa-solid fa-arrows-spin"></i></p><h3>Agent</h3>
@@ -123,52 +123,16 @@
 <section id="divider-1" class="section-divider" data-state="is-section-divider">
   <p class="section-num">01</p>
   <p class="kicker">Existence proof</p>
-  <h1>It already works</h1>
+  <h1>In production today:<br>systems agents &amp; a user gateway</h1>
+  <p class="subtitle" style="margin-top:14px;">Agents operating the infrastructure &middot; physicists reaching it through an MCP broker.</p>
   <aside class="notes">
-    Pace change. Keep this section deliberately COMPRESSED — it's evidence for the thesis, not the
-    whole talk. Goal: convince the room this is real and running for ~800 users, across more than one
-    experiment — then move on. Resist the urge to demo everything.
-  </aside>
-</section>
-
-<section id="proof-operations">
-  <p class="kicker">Existence proof &middot; one WLCG site</p>
-  <h2>This runs in <span class="accent">production</span>, not a demo</h2>
-  <div class="content">
-    <p class="text-lg">A Kubernetes-based analysis facility for <strong>USATLAS Operations</strong> &mdash; the UChicago AF, alongside the MWT2 Tier-2.</p>
-    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:18px; text-align:center; margin:14px 0 4px;">
-      <div><p style="font-size:30pt; font-weight:700; color:var(--maroon); margin:0; line-height:1.1;">~800</p><p class="text-muted" style="margin:2px 0 0;">physics users</p></div>
-      <div><p style="font-size:30pt; font-weight:700; color:var(--maroon); margin:0; line-height:1.1;">2,800</p><p class="text-muted" style="margin:2px 0 0;">HTCondor cores</p></div>
-      <div><p style="font-size:30pt; font-weight:700; color:var(--maroon); margin:0; line-height:1.1;">9 PB</p><p class="text-muted" style="margin:2px 0 0;">Ceph storage</p></div>
-      <div><p style="font-size:26pt; font-weight:700; color:var(--teal); margin:0; line-height:1.15;">Triton</p><p class="text-muted" style="margin:2px 0 0;">inference-as-a-service</p></div>
-    </div>
-    <div style="display:grid; grid-template-columns: 1.2fr 0.8fr; gap:20px; align-items:center; margin-top:6px;">
-      <p class="text-muted" style="font-size:12pt; margin:0;"><strong>Compute:</strong> 1520-core long queue (7&nbsp;days) + 1280-core short queue (4&nbsp;h, spills over), hyperconverged; 4 SSH + 4 Jupyter nodes; Dask&nbsp;Gateway.
-         <strong>Storage:</strong> /home NFS 19&nbsp;TB (100&nbsp;GB/user) &middot; /data + /cold Ceph 4.5&nbsp;PB each (/data 5&nbsp;TB/user, not backed up).</p>
-      <div>
-        <div class="shot filled light" style="min-height:0;">
-          <img src="images/NEW-ganglia-cpu-year.png" style="max-height:130px; width:auto;" alt="Ganglia graph: login02.af.uchicago.edu CPU usage over the past year">
-        </div>
-        <p class="shot-hint" style="text-align:center; margin-top:3px; font-size:10pt;">Real-time monitoring: <a href="https://ganglia.mwt2.org/">ganglia.mwt2.org</a></p>
-      </div>
-    </div>
-    <div class="callout teal" style="margin-top:12px;">
-      <p>Triton IaaS + a <strong>REANA</strong> workflow cluster already make this an <strong>AI/ML platform</strong>.
-         The agentic layer described in this talk sits on <strong>production WLCG infrastructure our team
-         operates day to day</strong>, not a slide-deck vision.</p></div>
-  </div>
-  <div class="footnote">Triton&rarr;Athena inference: V.&nbsp;Tsulaia, <a href="https://indico.cern.ch/event/1471803/contributions/6967260/">CHEP&nbsp;2026</a>.</div>
-  <aside class="notes">
-    Purpose: establish operations credibility BEFORE the agentic argument. Say out loud: "before we
-    argue about where AI is going, this is the infrastructure it runs on — the room knows this kind
-    of facility." Real numbers: ~800 users; HTCondor 1520-core long queue (7d) + 1280-core
-    short queue (4h, spills into long), hyperconverged / software-sliced; 4 SSH + 4 Jupyter nodes; /home NFS
-    19TB (100GB/user), /data Ceph 4.5PB (5TB/user, NOT backed up), /cold Ceph 4.5PB (no per-user quota, parks
-    retired-user data before deletion). Triton IaaS = the literal "infrastructure for AI/ML" in the job title;
-    Dask Gateway + REANA + benchmarking = HTC / data-management / systems operation. The Ganglia graph is a
-    live monitoring link (embedded PNG is a point-in-time snapshot; the real dashboard updates continuously)
-    — genuine, checkable infrastructure, not a mockup. Keep it to ~45s; it's a
-    credibility anchor, not a deep dive.
+    Pace change; keep compressed. Two concrete things stand behind this divider. Systems level:
+    Ilija's OpenClaw instance on Spark2 (infrastructure agents for the k8s clusters, dCache, Ceph,
+    Flux; services agents for JupyterLab, ServiceX, XCache; daily memory dumps synced to GitHub;
+    Slack/Mailgun/Mattermost channels) and the af-platform layer (AF chatbot at
+    afchatkit.af.atlas-ml.org plus MCP servers: Elasticsearch, Executor, Knowledge, CRIC, GGUS,
+    Rucio). User pathway: Giordon's credential-brokered MCP gateway at mcp.af.uchicago.edu.
+    Evidence for the thesis, not the whole talk — then move on.
   </aside>
 </section>
 
@@ -260,81 +224,6 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
 </section>
 </section>
 
-<section id="proof-jupyter-demo">
-  <!-- LIVE DEMO (promoted from the proof-tour montage); jupyter-mcp-demo.mp4 is the fallback -->
-  <p class="kicker">Running today &middot; let me show you one</p>
-  <h2>A live AF notebook, driven from your <span class="accent">phone</span></h2>
-  <div class="content">
-    <div style="display:grid; grid-template-columns: 0.82fr 1.18fr; gap:26px; align-items:center;">
-      <div>
-        <p>An in-pod <strong>MCP server</strong> exposes a running JupyterLab. Any MCP client &mdash; a
-           laptop, or a phone &mdash; drives it through a <strong>brokered gateway</strong>
-           we&rsquo;ll show you shortly.</p>
-        <ul style="font-size:13.5pt; margin-top:6px;">
-          <li>Same identity, same audit as every other tool call.</li>
-          <li>No notebook UI on the device &mdash; just intent in, results out.</li>
-          <li>The agent never sees a credential.</li>
-        </ul>
-      </div>
-      <div style="text-align:center;">
-        <video src="images/jupyter-mcp-demo.mp4" controls muted playsinline
-               style="max-height:380px; max-width:100%; border-radius:10px; box-shadow:0 8px 28px rgba(92,0,0,0.18);"></video>
-      </div>
-    </div>
-    <div class="callout teal" style="margin-top:12px;">
-      <p>The interesting thing isn&rsquo;t the phone. It&rsquo;s that the user&rsquo;s <strong>identity, authorization,
-         audit, and facility context</strong> followed them to it &mdash; that&rsquo;s a new architecture, not a trick.</p></div>
-  </div>
-  <div class="footnote">Built on the <a href="https://jupyter-mcp-server.datalayer.tech/providers/jupyter-streamable-http-extension/">Jupyter MCP streamable-HTTP extension</a> &middot; full-length recording: <a href="https://drive.google.com/file/d/1H5k_-l_fpzj4PRB7e_rlh_jY6SGyDPEM/view">Google Drive</a>.</div>
-  <aside class="notes">
-    THE crowd-pleaser, but land it as architecture, not a trick. Run it live: open an MCP client on my
-    phone, ask it to do something in a live AF JupyterLab pod (load a dataset, make a plot), show the
-    result come back. If wifi/AV is shaky, just play the embedded jupyter-mcp-demo.mp4 and narrate it.
-    Mechanism to say out loud: a Jupyter MCP server runs INSIDE the user's notebook pod; the client
-    speaks MCP to it through the same credential-brokered gateway (§3a), so it inherits the user's
-    identity and the audit trail. SAY THE ON-SLIDE LINE OUT LOUD after the clip — it's the whole point
-    of the demo, not a throwaway. Keep it to ~90 seconds; the demo is evidence for the thesis, not the thesis.
-  </aside>
-</section>
-
-<section id="proof-multiexp">
-  <!-- explicit multi-experiment slide (NEW, supports de-ATLAS framing) -->
-  <p class="kicker">Not an ATLAS story</p>
-  <h2>The same tools already cross <span class="accent">experiments</span></h2>
-  <div class="content">
-    <div style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap:24px; align-items:start;">
-      <div>
-        <ul>
-          <li><strong>ATLAS</strong> — the deepest playbook, in production at the UChicago AF.</li>
-          <li><strong>CMS &amp; DUNE</strong> — the hosted data-access layer already serves their VOs; informal collaboration with colleagues on these agentic ideas.</li>
-          <li><strong>Belle&nbsp;II</strong> — early discussions on the same ideas.</li>
-          <li><strong>ESCAPE</strong> — a live <code>escape</code> site behind the hosted Rucio MCP: the bridge to the multi-science world (<a href="#/escape">more shortly</a>).</li>
-        </ul>
-        <div class="callout" style="margin-top:10px;">
-          <p style="font-size:13pt;">The reason it crosses experiments isn&rsquo;t generosity — it&rsquo;s the <a href="#/arch-intent">architecture</a>: the agent
-             speaks <em>intent</em>, the facility wires the backend. Swap the playbook, keep the engine.</p>
-        </div>
-      </div>
-      <div>
-        <div class="shot filled light" style="min-height:0;">
-          <img src="images/NEW-rucio-mcp-oidc-sites.png" style="max-height:220px;" alt="rucio-mcp configured OIDC sites: atlas, cms, dune, escape, each at rucio-mcp.af.uchicago.edu/site/<vo>">
-        </div>
-        <p class="shot-hint" style="text-align:center; margin-top:4px; font-size:11pt;"><a href="https://rucio-mcp.af.uchicago.edu/">rucio-mcp.af.uchicago.edu</a> &mdash; four real, live OIDC sites.</p>
-        <pre style="margin-top:10px;"><code class="block" style="font-size:10.5pt;">claude mcp add --transport http rucio-atlas \
-  https://rucio-mcp.af.uchicago.edu/site/atlas/</code></pre>
-      </div>
-    </div>
-  </div>
-  <aside class="notes">
-    NEW slide, central to the brief's "less ATLAS-focused" ask. Status words are deliberately graded
-    and honest: ATLAS = production; CMS/DUNE = data-access layer already serves their VOs + informal
-    collaboration; Belle II = early discussions; ESCAPE = data-access site live. No collaborator names
-    on-slide or in notes (kept deliberately out). If asked "who?", answer conversationally; don't put
-    people on the record here. The screenshot + command make this concrete and unfakeable: a real,
-    reachable endpoint with four configured OIDC sites, one command away from any Claude Code session.
-  </aside>
-</section>
-
 <section id="theme-trust">
   <div class="theme-lead">
     <p class="theme-num">Part 2 of 3 &middot; AI acting <em>through</em> the facility</p>
@@ -349,22 +238,20 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
     or model is on the other end. Covers the broker, intent-level pipelines, and identity.</aside>
 </section>
 
-<section>
 <section id="agenda-gateway">
   <p class="kicker">The physicist&rsquo;s view &middot; the USB-C port of the facility</p>
   <h2>A credential-brokered <span class="accent">MCP gateway</span></h2>
   <div class="content">
-    <p>One standard socket in front of the facility&rsquo;s services &mdash; plug in any agent, from any
-       laptop. The LLM client <strong>never holds raw credentials</strong>; the broker authenticates the
-       user, mints short-lived per-service credentials, and audits every tool call.</p>
-    <div style="text-align:center; margin:10px 0;">
-      <img src="images/NEW-af-mcp-arch.svg" alt="Claude, Gemini or any MCP client to the mcp.af.uchicago.edu front door (oauth2-proxy, AF Keycloak OIDC), through a FastMCP aggregator and AF credential broker (FastAPI /v1) doing identity, authZ, credential brokering and audit, fanning out to rucio-mcp, ami-mcp, openmagic, panda-mcp, condor-mcp, gitlab-mcp, jupyter-control and an Nth backend with no code change" style="max-width:100%; max-height:330px;">
+    <p style="margin-bottom:2px;">One standard socket in front of the facility&rsquo;s services. The LLM client
+       <strong>never holds raw credentials</strong>; the broker authenticates the user, mints short-lived
+       per-service credentials, and audits every tool call.</p>
+    <div style="text-align:center; margin:6px 0 4px;">
+      <img src="images/NEW-af-mcp-arch.svg" alt="Claude, Gemini or any MCP client to the mcp.af.uchicago.edu front door (oauth2-proxy, AF Keycloak OIDC), through a FastMCP aggregator and AF credential broker (FastAPI /v1) doing identity, authZ, credential brokering and audit, fanning out to rucio-mcp, ami-mcp, openmagic, panda-mcp, condor-mcp, gitlab-mcp, jupyter-control and an Nth backend with no code change" style="max-width:100%; max-height:315px;">
     </div>
-    <div class="callout teal" style="margin-top:6px;">
-      <p>This is the <strong>strategic boundary</strong>: identity, authZ, credential brokering, and audit
-         in one place. It&rsquo;s the natural way to put an agentic layer in front of a site&rsquo;s
-         service estate without handing tokens to a chatbot &mdash; the same boundary a site needs regardless of AI.
-         Live at <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s <strong>af-mcp-platform</strong>.</p></div>
+    <div class="callout teal" style="margin-top:4px;">
+      <p style="font-size:13.5pt;">The <strong>strategic boundary</strong>: identity, authZ, credential brokering, and audit in one
+         place &mdash; the same boundary a site needs regardless of AI. Live at
+         <strong>mcp.af.uchicago.edu</strong>: Giordon Stark&rsquo;s <strong>af-mcp-platform</strong>.</p></div>
   </div>
   <div class="footnote"><a href="https://github.com/kratsg/af-mcp-platform">af-mcp-platform</a> &middot; <a href="https://github.com/kratsg/rucio-mcp">rucio-mcp</a> &middot; <a href="https://github.com/kratsg/ami-mcp">ami-mcp</a> &middot; <a href="https://github.com/atlas-outreach-data-tools/atlasopenmagic-mcp">atlasopenmagic</a> &middot; <a href="https://panda-wms.readthedocs.io/en/latest/advanced/mcp.html">panda-mcp</a> &middot; <a href="https://indico.cern.ch/event/1471803/contributions/6967102/">condor-mcp</a> (Bockelman, CHEP&nbsp;2026).</div>
   <aside class="notes">
@@ -383,68 +270,12 @@ Priority: fix /scratch perms c111+c113, then release aukiefer
   </aside>
 </section>
 
-<section id="agenda-gateway-topology">
-  <!-- DEEP-DIVE / BACKUP : MCP granularity / gateway topology tradeoffs -->
-  <p class="kicker">Deep-dive &middot; gateway topology</p>
-  <h2>One MCP, many, or a gateway?</h2>
-  <div class="content">
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:16px;">
-      <div class="card">
-        <svg viewBox="0 0 220 90" style="width:100%; height:74px;">
-          <rect x="8" y="8" width="204" height="74" rx="8" fill="none" stroke="#800000" stroke-width="2" stroke-dasharray="4 3"/>
-          <text x="110" y="21" text-anchor="middle" font-size="9" fill="#800000" font-family="Inter,Helvetica,sans-serif" font-weight="600">one process boundary</text>
-          <rect x="20" y="30" width="52" height="40" rx="5" fill="#f3e6e6" stroke="#800000" stroke-width="1.2"/>
-          <text x="46" y="53" text-anchor="middle" font-size="10" font-family="Inter,Helvetica,sans-serif">atlas</text>
-          <rect x="84" y="30" width="52" height="40" rx="5" fill="#f3e6e6" stroke="#800000" stroke-width="1.2"/>
-          <text x="110" y="53" text-anchor="middle" font-size="10" font-family="Inter,Helvetica,sans-serif">cms</text>
-          <rect x="148" y="30" width="52" height="40" rx="5" fill="#f3e6e6" stroke="#800000" stroke-width="1.2"/>
-          <text x="174" y="53" text-anchor="middle" font-size="10" font-family="Inter,Helvetica,sans-serif">dune</text>
-        </svg>
-        <h3 style="font-size:15pt;">One server, many sites</h3>
-        <p style="font-size:12pt;"><i class="fa-solid fa-check text-teal"></i> one deploy &nbsp; <i class="fa-solid fa-triangle-exclamation text-maroon"></i> per-VO auth in one process</p></div>
-      <div class="card teal">
-        <svg viewBox="0 0 220 90" style="width:100%; height:74px;">
-          <rect x="6" y="18" width="62" height="60" rx="7" fill="none" stroke="#1F6F78" stroke-width="2"/>
-          <text x="37" y="40" text-anchor="middle" font-size="9.5" font-family="Inter,Helvetica,sans-serif" font-weight="600">atlas</text>
-          <text x="37" y="53" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="Inter,Helvetica,sans-serif">server</text>
-          <rect x="79" y="18" width="62" height="60" rx="7" fill="none" stroke="#1F6F78" stroke-width="2"/>
-          <text x="110" y="40" text-anchor="middle" font-size="9.5" font-family="Inter,Helvetica,sans-serif" font-weight="600">cms</text>
-          <text x="110" y="53" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="Inter,Helvetica,sans-serif">server</text>
-          <rect x="152" y="18" width="62" height="60" rx="7" fill="none" stroke="#1F6F78" stroke-width="2"/>
-          <text x="183" y="40" text-anchor="middle" font-size="9.5" font-family="Inter,Helvetica,sans-serif" font-weight="600">dune</text>
-          <text x="183" y="53" text-anchor="middle" font-size="8" fill="#6B6B6B" font-family="Inter,Helvetica,sans-serif">server</text>
-        </svg>
-        <h3 style="font-size:15pt;">One server per site</h3>
-        <p style="font-size:12pt;"><i class="fa-solid fa-check text-teal"></i> clean isolation &nbsp; <i class="fa-solid fa-triangle-exclamation text-maroon"></i> N servers to run</p></div>
-      <div class="card">
-        <svg viewBox="0 0 220 90" style="width:100%; height:74px;">
-          <rect x="79" y="6" width="62" height="28" rx="6" fill="#800000"/>
-          <text x="110" y="24" text-anchor="middle" font-size="9.5" fill="#fff" font-family="Inter,Helvetica,sans-serif" font-weight="600">gateway</text>
-          <line x1="110" y1="34" x2="46" y2="52" stroke="#800000" stroke-width="1.5"/>
-          <line x1="110" y1="34" x2="110" y2="52" stroke="#800000" stroke-width="1.5"/>
-          <line x1="110" y1="34" x2="174" y2="52" stroke="#800000" stroke-width="1.5"/>
-          <rect x="20" y="54" width="52" height="26" rx="5" fill="none" stroke="#6B6B6B" stroke-width="1.2"/>
-          <text x="46" y="71" text-anchor="middle" font-size="8.5" font-family="Inter,Helvetica,sans-serif">sub-MCP</text>
-          <rect x="84" y="54" width="52" height="26" rx="5" fill="none" stroke="#6B6B6B" stroke-width="1.2"/>
-          <text x="110" y="71" text-anchor="middle" font-size="8.5" font-family="Inter,Helvetica,sans-serif">sub-MCP</text>
-          <rect x="148" y="54" width="52" height="26" rx="5" fill="none" stroke="#6B6B6B" stroke-width="1.2"/>
-          <text x="174" y="71" text-anchor="middle" font-size="8.5" font-family="Inter,Helvetica,sans-serif">sub-MCP</text>
-        </svg>
-        <h3 style="font-size:15pt;">Single gateway</h3>
-        <p style="font-size:12pt;"><i class="fa-solid fa-check text-teal"></i> one identity &nbsp; <i class="fa-solid fa-triangle-exclamation text-maroon"></i> token sprawl / choke point</p></div>
-    </div>
-    <p class="text-muted" style="font-size:12.5pt; margin-top:10px;"><a href="https://gofastmcp.com/servers/composition">FastMCP</a> composition = one auth provider per server; that constraint drives a lot of the design.</p>
-  </div>
-  <aside class="notes">BACKUP for the auth-curious (Campana/Verkerke may push here). Ties directly into the DCR-vs-CIMD slide.</aside>
-</section>
-</section>
-
 <section>
 <section id="arch-intent">
   <p class="kicker">The physicist&rsquo;s view &middot; pipelines from the laptop</p>
   <h2>The agent speaks <span class="accent">intent</span>, the facility wires the backend</h2>
   <div class="content">
-    <p style="margin-bottom:4px;">A whole pipeline &mdash; discovery to statistical inference &mdash; driven from the
+    <p style="margin-bottom:4px;">A whole pipeline driven from the
        physicist&rsquo;s own coding environment, through the broker, to one facility or several:</p>
     <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:14px; margin:6px 0;">
       <p class="node fill" style="font-size:14pt;">data_tool<span class="sub">&ldquo;get this dataset + metadata&rdquo;</span></p>
