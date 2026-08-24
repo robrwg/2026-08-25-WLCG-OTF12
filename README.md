@@ -1,18 +1,21 @@
-# The Facility Is the Context
+# AI and Facilities
 
-Slides for the **Nikhef interview colloquium** (Amsterdam, 1 July 2026) by Giordon Stark
-(UC Santa Cruz / SCIPP): *"The Facility Is the Context — agentic computing infrastructure
-for analysis at scale."*
+Slides for **WLCG Open Technical Forum #12** ("AI-driven Evolution in WLCG", CERN,
+25 August 2026) by Rob Gardner, Giordon Stark, Ilija Vukotic, and Fengping Hu (University
+of Chicago): *"AI and Facilities — towards trustworthy adoption of agentic management and use."*
 
-**▶ View the deck:** https://kratsg.github.io/2026-07-01-nikhef-colloquium/
+**▶ View the deck:** https://robrwg.github.io/2026-08-25-WLCG-OTF12/
 
-The talk argues one thing: as LLM agents arrive in scientific computing, the decisive layer
-is not the model but the **facility's own context, identity, and trust boundaries** — and that
-layer ports across experiments and sciences. Drawing on a working deployment at the UChicago
-ATLAS Analysis Facility (now also serving CMS, DUNE, and ESCAPE data access), it lays out what
-runs today, the architecture that makes it portable, and an agenda of open problems:
-credential-brokered MCP gateways, OIDC/SSH-certificate adoption, sandboxing on and off
-Kubernetes, pixi-native batch environments, and equitable access to inference.
+Two trust problems, one facility: AI acting **on** the facility (privileged actions a
+sysadmin would do — earned incrementally through runbooks, governance levels, reviewable
+memory, and dual enforcement) and AI acting **through** it (a physicist's analysis, driven
+from their laptop via a credential-brokered MCP gateway, the "USB-C port" of the analysis
+facility). Grounded in what runs today at the UChicago ATLAS Analysis Facility, and framed
+as options for what WLCG could — or need not — coordinate.
+
+Rebuilt from Giordon Stark's Nikhef colloquium deck
+([kratsg/2026-07-01-nikhef-colloquium](https://github.com/kratsg/2026-07-01-nikhef-colloquium)),
+which carries the physicist-side story in full.
 
 ## What's here
 
